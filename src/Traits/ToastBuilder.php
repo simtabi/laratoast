@@ -5,14 +5,11 @@ namespace Simtabi\Laratoast\Traits;
 trait ToastBuilder
 {
 
-    public ?string $text                = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
     public ?string $heading             = 'Note'; // Optional heading to be shown on the toast
-    public ?string $icon                = 'warning'; // Type of toast icon
     public ?string $showHideTransition  = 'fade'; // fade; slide or plain
     public bool    $allowToastClose     = true; // Boolean value true or false
     public int     $hideAfter           = 3000; // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
     public int     $stack               = 20; // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-    public ?string $position            = 'bottom-left'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 
     public ?string $textAlign           = 'left';  // Text alignment i.e. left, right or center
     public bool    $loader              = true;  // Whether to show loader or not. True by default
@@ -23,40 +20,20 @@ trait ToastBuilder
     public ?string $afterHidden         = 'function () {}'; // will be triggered after the toast has been hidden
 
     /**
-     * @param string|null $text
-     * @return ToastBuilder
-     */
-    public function setText(?string $text): ToastBuilder
-    {
-        $this->text = $text;
-        return $this;
-    }
-
-    /**
      * @param string|null $heading
-     * @return ToastBuilder
+     * @return self
      */
-    public function setHeading(?string $heading): ToastBuilder
+    public function setHeading(?string $heading): self
     {
         $this->heading = $heading;
         return $this;
     }
 
     /**
-     * @param string|null $icon
-     * @return ToastBuilder
-     */
-    public function setIcon(?string $icon): ToastBuilder
-    {
-        $this->icon = $icon;
-        return $this;
-    }
-
-    /**
      * @param string|null $showHideTransition
-     * @return ToastBuilder
+     * @return self
      */
-    public function setShowHideTransition(?string $showHideTransition): ToastBuilder
+    public function setShowHideTransition(?string $showHideTransition): self
     {
         $this->showHideTransition = $showHideTransition;
         return $this;
@@ -64,9 +41,9 @@ trait ToastBuilder
 
     /**
      * @param bool $allowToastClose
-     * @return ToastBuilder
+     * @return self
      */
-    public function setAllowToastClose(bool $allowToastClose): ToastBuilder
+    public function setAllowToastClose(bool $allowToastClose): self
     {
         $this->allowToastClose = $allowToastClose;
         return $this;
@@ -74,9 +51,9 @@ trait ToastBuilder
 
     /**
      * @param int $hideAfter
-     * @return ToastBuilder
+     * @return self
      */
-    public function setHideAfter(int $hideAfter): ToastBuilder
+    public function setHideAfter(int $hideAfter): self
     {
         $this->hideAfter = $hideAfter;
         return $this;
@@ -84,29 +61,19 @@ trait ToastBuilder
 
     /**
      * @param int $stack
-     * @return ToastBuilder
+     * @return self
      */
-    public function setStack(int $stack): ToastBuilder
+    public function setStack(int $stack): self
     {
         $this->stack = $stack;
         return $this;
     }
 
     /**
-     * @param string|null $position
-     * @return ToastBuilder
-     */
-    public function setPosition(?string $position): ToastBuilder
-    {
-        $this->position = $position;
-        return $this;
-    }
-
-    /**
      * @param string|null $textAlign
-     * @return ToastBuilder
+     * @return self
      */
-    public function setTextAlign(?string $textAlign): ToastBuilder
+    public function setTextAlign(?string $textAlign): self
     {
         $this->textAlign = $textAlign;
         return $this;
@@ -114,9 +81,9 @@ trait ToastBuilder
 
     /**
      * @param bool $loader
-     * @return ToastBuilder
+     * @return self
      */
-    public function setLoader(bool $loader): ToastBuilder
+    public function setLoader(bool $loader): self
     {
         $this->loader = $loader;
         return $this;
@@ -124,9 +91,9 @@ trait ToastBuilder
 
     /**
      * @param string|null $loaderBg
-     * @return ToastBuilder
+     * @return self
      */
-    public function setLoaderBg(?string $loaderBg): ToastBuilder
+    public function setLoaderBg(?string $loaderBg): self
     {
         $this->loaderBg = $loaderBg;
         return $this;
@@ -134,9 +101,9 @@ trait ToastBuilder
 
     /**
      * @param string|null $beforeShow
-     * @return ToastBuilder
+     * @return self
      */
-    public function setBeforeShow(?string $beforeShow): ToastBuilder
+    public function setBeforeShow(?string $beforeShow): self
     {
         $this->beforeShow = $beforeShow;
         return $this;
@@ -144,9 +111,9 @@ trait ToastBuilder
 
     /**
      * @param string|null $afterShown
-     * @return ToastBuilder
+     * @return self
      */
-    public function setAfterShown(?string $afterShown): ToastBuilder
+    public function setAfterShown(?string $afterShown): self
     {
         $this->afterShown = $afterShown;
         return $this;
@@ -154,9 +121,9 @@ trait ToastBuilder
 
     /**
      * @param string|null $beforeHide
-     * @return ToastBuilder
+     * @return self
      */
-    public function setBeforeHide(?string $beforeHide): ToastBuilder
+    public function setBeforeHide(?string $beforeHide): self
     {
         $this->beforeHide = $beforeHide;
         return $this;
@@ -164,9 +131,9 @@ trait ToastBuilder
 
     /**
      * @param string|null $afterHidden
-     * @return ToastBuilder
+     * @return self
      */
-    public function setAfterHidden(?string $afterHidden): ToastBuilder
+    public function setAfterHidden(?string $afterHidden): self
     {
         $this->afterHidden = $afterHidden;
         return $this;
@@ -175,25 +142,9 @@ trait ToastBuilder
     /**
      * @return string|null
      */
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getHeading(): ?string
     {
         return $this->heading;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getIcon(): ?string
-    {
-        return $this->icon;
     }
 
     /**
@@ -226,14 +177,6 @@ trait ToastBuilder
     public function getStack(): int
     {
         return $this->stack;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPosition(): ?string
-    {
-        return $this->position;
     }
 
     /**

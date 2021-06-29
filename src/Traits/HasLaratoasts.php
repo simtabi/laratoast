@@ -4,8 +4,7 @@ namespace Simtabi\Laratoast\Traits;
 
 trait HasLaratoasts
 {
-
-    use ToastBuilder;
+    use LaratoastBuilder;
 
     /**
      * Popup sweetalert modal
