@@ -18,7 +18,7 @@ trait HasLaratoasts
         $errorBag = $this->getErrorBag()->all();
 
         if (count($errorBag) > 0){
-            return $this->setText($errorBag[0])->fireToastNotification();
+            return $this->setToastText($errorBag[0])->fireToastNotification();
         }
         return false;
     }
