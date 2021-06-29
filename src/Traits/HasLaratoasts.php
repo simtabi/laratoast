@@ -4,7 +4,8 @@ namespace Simtabi\Laratoast\Traits;
 
 trait HasLaratoasts
 {
-    use LaratoastBuilder;
+    use SweetalertBuilder,
+        ToastBuilder;
 
 
     /**
@@ -30,59 +31,59 @@ trait HasLaratoasts
     public function fireSweetalertModal()
     {
        return $this->emit('swal:fire', [
-            'icon'                   => $this->icon,
-            'text'                   => $this->text,
-            'position'               => $this->position,
+            'icon'                   => $this->swalIcon,
+            'text'                   => $this->swalText,
+            'position'               => $this->swalPosition,
 
             // defaults
-            'title'                  => $this->title,
-            'footer'                 => $this->footer,
+            'title'                  => $this->swalTitle,
+            'footer'                 => $this->swalFooter,
 
             // with image
-            'imageUrl'               => $this->imageUrl,
-            'imageAlt'               => $this->imageAlt,
-            'imageHeight'            => $this->imageHeight,
-            'imageWidth'             => $this->imageWidth,
+            'imageUrl'               => $this->swalImageUrl,
+            'imageAlt'               => $this->swalImageAlt,
+            'imageHeight'            => $this->swalImageHeight,
+            'imageWidth'             => $this->swalImageWidth,
 
             // with html
-            'html'                   => $this->html,
-            'showCloseButton'        => $this->showCloseButton,
-            'showCancelButton'       => $this->showCancelButton,
-            'focusConfirm'           => $this->focusConfirm,
-            'confirmButtonText'      => $this->confirmButtonText,
-            'confirmButtonAriaLabel' => $this->confirmButtonAriaLabel,
-            'cancelButtonText'       => $this->cancelButtonText,
-            'cancelButtonAriaLabel'  => $this->cancelButtonAriaLabel,
+            'html'                   => $this->swalHtml,
+            'showCloseButton'        => $this->swalShowCloseButton,
+            'showCancelButton'       => $this->swalShowCancelButton,
+            'focusConfirm'           => $this->swalFocusConfirm,
+            'confirmButtonText'      => $this->swalConfirmButtonText,
+            'confirmButtonAriaLabel' => $this->swalConfirmButtonAriaLabel,
+            'cancelButtonText'       => $this->swalCancelButtonText,
+            'cancelButtonAriaLabel'  => $this->swalCancelButtonAriaLabel,
 
             // dialog with 3 buttons
-            'showDenyButton'         => $this->showDenyButton,
-            'denyButtonText'         => $this->denyButtonText,
+            'showDenyButton'         => $this->swalShowDenyButton,
+            'denyButtonText'         => $this->swalDenyButtonText,
 
             // with custom position
-            'showConfirmButton'      => $this->showConfirmButton,
-            'timer'                  => $this->timer,
+            'showConfirmButton'      => $this->swalShowConfirmButton,
+            'timer'                  => $this->swalTimer,
 
             // with animate css
-            'showClass'              => $this->showClass,
-            'hideClass'              => $this->hideClass,
+            'showClass'              => $this->swalShowClass,
+            'hideClass'              => $this->swalHideClass,
 
             // confirm dialog
-            'confirmButtonColor'     => $this->confirmButtonColor,
-            'cancelButtonColor'      => $this->cancelButtonColor,
+            'confirmButtonColor'     => $this->swalConfirmButtonColor,
+            'cancelButtonColor'      => $this->swalCancelButtonColor,
 
             // custom width/padding
-            'width'                  => $this->width,
-            'padding'                => $this->padding,
-            'background'             => $this->background,
-            'backdrop'               => $this->backdrop,
+            'width'                  => $this->swalWidth,
+            'padding'                => $this->swalPadding,
+            'background'             => $this->swalBackground,
+            'backdrop'               => $this->swalBackdrop,
 
             // autoclose timer
-            'timerProgressBar'      => $this->timerProgressBar,
-            'didOpen'               => $this->didOpen,
-            'willClose'             => $this->willClose,
+            'timerProgressBar'      => $this->swalTimerProgressBar,
+            'didOpen'               => $this->swalDidOpen,
+            'willClose'             => $this->swalWillClose,
 
             // with rtl
-            'iconHtml'              => $this->iconHtml,
+            'iconHtml'              => $this->swalIconHtml,
         ]);
     }
 
@@ -94,23 +95,23 @@ trait HasLaratoasts
     public function fireToastNotification()
     {
         return $this->emit('toast:fire', [
-            'icon'               => $this->icon,
-            'text'               => $this->text,
-            'position'           => $this->position,
+            'icon'               => $this->toastIcon,
+            'text'               => $this->toastText,
+            'position'           => $this->toastPosition,
 
-            'heading'            => $this->heading,
-            'showHideTransition' => $this->showHideTransition,
-            'allowToastClose'    => $this->allowToastClose,
-            'hideAfter'          => $this->hideAfter,
-            'stack'              => $this->stack,
+            'heading'            => $this->toastHeading,
+            'showHideTransition' => $this->toastShowHideTransition,
+            'allowToastClose'    => $this->toastAllowToastClose,
+            'hideAfter'          => $this->toastHideAfter,
+            'stack'              => $this->toastStack,
 
-            'textAlign'          => $this->textAlign,
-            'loader'             => $this->loader,
-            'loaderBg'           => $this->loaderBg,
-            'beforeShow'         => $this->beforeShow,
-            'afterShown'         => $this->afterShown,
-            'beforeHide'         => $this->beforeHide,
-            'afterHidden'        => $this->afterHidden,
+            'textAlign'          => $this->toastTextAlign,
+            'loader'             => $this->toastLoader,
+            'loaderBg'           => $this->toastLoaderBg,
+            'beforeShow'         => $this->toastBeforeShow,
+            'afterShown'         => $this->toastAfterShown,
+            'beforeHide'         => $this->toastBeforeHide,
+            'afterHidden'        => $this->toastAfterHidden,
         ]);
     }
 

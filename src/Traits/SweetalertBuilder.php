@@ -4,598 +4,653 @@ namespace Simtabi\Laratoast\Traits;
 
 trait SweetalertBuilder
 {
-    
+    public ?string $swalIcon                   = 'warning'; // Type of toast icon
+    public ?string $swalText                   = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
+    public ?string $swalPosition               = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
     // defaults
-    public ?string $title                  = 'Oops...';
-    public ?string $footer                 = '<a href="">Why do I have this issue?</a>';
+    public ?string $swalTitle                  = 'Oops...';
+    public ?string $swalFooter                 = '<a href="">Why do I have this issue?</a>';
 
     // with image
-    public ?string $imageUrl               = '#';
-    public ?string $imageAlt               = 'A tall image';
-    public int     $imageHeight            = 1500;
-    public int     $imageWidth             = 400;
+    public ?string $swalImageUrl               = '#';
+    public ?string $swalImageAlt               = 'A tall image';
+    public int     $swalImageHeight            = 1500;
+    public int     $swalImageWidth             = 400;
 
     // with html
-    public ?string $html                   = 'You can use <b>bold text</b>, <a href="//sweetalert2.github.io">links</a> and other HTML tags';
-    public bool    $showCloseButton        = true;
-    public bool    $showCancelButton       = true;
-    public bool    $focusConfirm           = false;
-    public ?string $confirmButtonText      = '<i class="fa fa-thumbs-up"></i> Great!';
-    public ?string $confirmButtonAriaLabel = 'Thumbs up, great!';
-    public ?string $cancelButtonText       = '<i class="fa fa-thumbs-down"></i>';
-    public ?string $cancelButtonAriaLabel  = 'Thumbs down';
+    public ?string $swalHtml                   = 'You can use <b>bold text</b>, <a href="//sweetalert2.github.io">links</a> and other HTML tags';
+    public bool    $swalShowCloseButton        = true;
+    public bool    $swalShowCancelButton       = true;
+    public bool    $swalFocusConfirm           = false;
+    public ?string $swalConfirmButtonText      = '<i class="fa fa-thumbs-up"></i> Great!';
+    public ?string $swalConfirmButtonAriaLabel = 'Thumbs up, great!';
+    public ?string $swalCancelButtonText       = '<i class="fa fa-thumbs-down"></i>';
+    public ?string $swalCancelButtonAriaLabel  = 'Thumbs down';
 
     // dialog with 3 buttons
-    public bool    $showDenyButton         = true;
-    public ?string $denyButtonText         = 'Don\'t save';
+    public bool    $swalShowDenyButton         = true;
+    public ?string $swalDenyButtonText         = 'Don\'t save';
 
     // with custom position
-    public bool    $showConfirmButton      = false;
-    public int     $timer                  = 1500;
+    public bool    $swalShowConfirmButton      = false;
+    public int     $swalTimer                  = 1500;
 
     // with animate css
-    public ?string $showClass              = 'animate__animated animate__fadeInDown';
-    public ?string $hideClass              = 'animate__animated animate__fadeOutUp';
+    public ?string $swalShowClass              = 'animate__animated animate__fadeInDown';
+    public ?string $swalHideClass              = 'animate__animated animate__fadeOutUp';
 
     // confirm dialog
-    public ?string $confirmButtonColor     = '#3085d6';
-    public ?string $cancelButtonColor      = '#d33';
+    public ?string $swalConfirmButtonColor     = '#3085d6';
+    public ?string $swalCancelButtonColor      = '#d33';
 
     // custom width/padding
-    public int     $width                  = 600;
-    public ?string $padding                = '3em';
-    public ?string $background             = '#fff';
-    public ?string $backdrop               = null;
-    
+    public int     $swalWidth                  = 600;
+    public ?string $swalPadding                = '3em';
+    public ?string $swalBackground             = '#fff';
+    public ?string $swalBackdrop               = null;
+
     // autoclose timer
-    public bool    $timerProgressBar      = true;
-    public ?string $didOpen               = null; // call back
-    public ?string $willClose             = null; // timer
+    public bool    $swalTimerProgressBar      = true;
+    public ?string $swalDidOpen               = null; // call back
+    public ?string $swalWillClose             = null; // timer
 
     // with rtl
-    public ?string $iconHtml              = '؟';
-
-    
-
+    public ?string $swalIconHtml              = '؟';
 
     /**
-     * @param string|null $title
-     * @return SweetalertBuilder
+     * @param string|null $swalIcon
+     * @return self
      */
-    public function setTitle(?string $title): self
+    public function setSwalIcon(?string $swalIcon): self
     {
-        $this->title = $title;
+        $this->swalIcon = $swalIcon;
         return $this;
     }
 
     /**
-     * @param string|null $footer
+     * @param string|null $swalText
      * @return self
      */
-    public function setFooter(?string $footer): self
+    public function setSwalText(?string $swalText): self
     {
-        $this->footer = $footer;
+        $this->swalText = $swalText;
         return $this;
     }
 
     /**
-     * @param string|null $imageUrl
+     * @param string|null $swalPosition
      * @return self
      */
-    public function setImageUrl(?string $imageUrl): self
+    public function setSwalPosition(?string $swalPosition): self
     {
-        $this->imageUrl = $imageUrl;
+        $this->swalPosition = $swalPosition;
         return $this;
     }
 
     /**
-     * @param string|null $imageAlt
+     * @param string|null $swalTitle
      * @return self
      */
-    public function setImageAlt(?string $imageAlt): self
+    public function setSwalTitle(?string $swalTitle): self
     {
-        $this->imageAlt = $imageAlt;
+        $this->swalTitle = $swalTitle;
         return $this;
     }
 
     /**
-     * @param int $imageHeight
+     * @param string|null $swalFooter
      * @return self
      */
-    public function setImageHeight(int $imageHeight): self
+    public function setSwalFooter(?string $swalFooter): self
     {
-        $this->imageHeight = $imageHeight;
+        $this->swalFooter = $swalFooter;
         return $this;
     }
 
     /**
-     * @param int $imageWidth
+     * @param string|null $swalImageUrl
      * @return self
      */
-    public function setImageWidth(int $imageWidth): self
+    public function setSwalImageUrl(?string $swalImageUrl): self
     {
-        $this->imageWidth = $imageWidth;
+        $this->swalImageUrl = $swalImageUrl;
         return $this;
     }
 
     /**
-     * @param string|null $html
+     * @param string|null $swalImageAlt
      * @return self
      */
-    public function setHtml(?string $html): self
+    public function setSwalImageAlt(?string $swalImageAlt): self
     {
-        $this->html = $html;
+        $this->swalImageAlt = $swalImageAlt;
         return $this;
     }
 
     /**
-     * @param bool $showCloseButton
+     * @param int $swalImageHeight
      * @return self
      */
-    public function setShowCloseButton(bool $showCloseButton): self
+    public function setSwalImageHeight(int $swalImageHeight): self
     {
-        $this->showCloseButton = $showCloseButton;
+        $this->swalImageHeight = $swalImageHeight;
         return $this;
     }
 
     /**
-     * @param bool $showCancelButton
+     * @param int $swalImageWidth
      * @return self
      */
-    public function setShowCancelButton(bool $showCancelButton): self
+    public function setSwalImageWidth(int $swalImageWidth): self
     {
-        $this->showCancelButton = $showCancelButton;
+        $this->swalImageWidth = $swalImageWidth;
         return $this;
     }
 
     /**
-     * @param bool $focusConfirm
+     * @param string|null $swalHtml
      * @return self
      */
-    public function setFocusConfirm(bool $focusConfirm): self
+    public function setSwalHtml(?string $swalHtml): self
     {
-        $this->focusConfirm = $focusConfirm;
+        $this->swalHtml = $swalHtml;
         return $this;
     }
 
     /**
-     * @param string|null $confirmButtonText
+     * @param bool $swalShowCloseButton
      * @return self
      */
-    public function setConfirmButtonText(?string $confirmButtonText): self
+    public function setSwalShowCloseButton(bool $swalShowCloseButton): self
     {
-        $this->confirmButtonText = $confirmButtonText;
+        $this->swalShowCloseButton = $swalShowCloseButton;
         return $this;
     }
 
     /**
-     * @param string|null $confirmButtonAriaLabel
+     * @param bool $swalShowCancelButton
      * @return self
      */
-    public function setConfirmButtonAriaLabel(?string $confirmButtonAriaLabel): self
+    public function setSwalShowCancelButton(bool $swalShowCancelButton): self
     {
-        $this->confirmButtonAriaLabel = $confirmButtonAriaLabel;
+        $this->swalShowCancelButton = $swalShowCancelButton;
         return $this;
     }
 
     /**
-     * @param string|null $cancelButtonText
+     * @param bool $swalFocusConfirm
      * @return self
      */
-    public function setCancelButtonText(?string $cancelButtonText): self
+    public function setSwalFocusConfirm(bool $swalFocusConfirm): self
     {
-        $this->cancelButtonText = $cancelButtonText;
+        $this->swalFocusConfirm = $swalFocusConfirm;
         return $this;
     }
 
     /**
-     * @param string|null $cancelButtonAriaLabel
+     * @param string|null $swalConfirmButtonText
      * @return self
      */
-    public function setCancelButtonAriaLabel(?string $cancelButtonAriaLabel): self
+    public function setSwalConfirmButtonText(?string $swalConfirmButtonText): self
     {
-        $this->cancelButtonAriaLabel = $cancelButtonAriaLabel;
+        $this->swalConfirmButtonText = $swalConfirmButtonText;
         return $this;
     }
 
     /**
-     * @param bool $showDenyButton
+     * @param string|null $swalConfirmButtonAriaLabel
      * @return self
      */
-    public function setShowDenyButton(bool $showDenyButton): self
+    public function setSwalConfirmButtonAriaLabel(?string $swalConfirmButtonAriaLabel): self
     {
-        $this->showDenyButton = $showDenyButton;
+        $this->swalConfirmButtonAriaLabel = $swalConfirmButtonAriaLabel;
         return $this;
     }
 
     /**
-     * @param string|null $denyButtonText
+     * @param string|null $swalCancelButtonText
      * @return self
      */
-    public function setDenyButtonText(?string $denyButtonText): self
+    public function setSwalCancelButtonText(?string $swalCancelButtonText): self
     {
-        $this->denyButtonText = $denyButtonText;
+        $this->swalCancelButtonText = $swalCancelButtonText;
         return $this;
     }
 
     /**
-     * @param bool $showConfirmButton
+     * @param string|null $swalCancelButtonAriaLabel
      * @return self
      */
-    public function setShowConfirmButton(bool $showConfirmButton): self
+    public function setSwalCancelButtonAriaLabel(?string $swalCancelButtonAriaLabel): self
     {
-        $this->showConfirmButton = $showConfirmButton;
+        $this->swalCancelButtonAriaLabel = $swalCancelButtonAriaLabel;
         return $this;
     }
 
     /**
-     * @param int $timer
+     * @param bool $swalShowDenyButton
      * @return self
      */
-    public function setTimer(int $timer): self
+    public function setSwalShowDenyButton(bool $swalShowDenyButton): self
     {
-        $this->timer = $timer;
+        $this->swalShowDenyButton = $swalShowDenyButton;
         return $this;
     }
 
     /**
-     * @param string|null $showClass
+     * @param string|null $swalDenyButtonText
      * @return self
      */
-    public function setShowClass(?string $showClass): self
+    public function setSwalDenyButtonText(?string $swalDenyButtonText): self
     {
-        $this->showClass = $showClass;
+        $this->swalDenyButtonText = $swalDenyButtonText;
         return $this;
     }
 
     /**
-     * @param string|null $hideClass
+     * @param bool $swalShowConfirmButton
      * @return self
      */
-    public function setHideClass(?string $hideClass): self
+    public function setSwalShowConfirmButton(bool $swalShowConfirmButton): self
     {
-        $this->hideClass = $hideClass;
+        $this->swalShowConfirmButton = $swalShowConfirmButton;
         return $this;
     }
 
     /**
-     * @param string|null $confirmButtonColor
+     * @param int $swalTimer
      * @return self
      */
-    public function setConfirmButtonColor(?string $confirmButtonColor): self
+    public function setSwalTimer(int $swalTimer): self
     {
-        $this->confirmButtonColor = $confirmButtonColor;
+        $this->swalTimer = $swalTimer;
         return $this;
     }
 
     /**
-     * @param string|null $cancelButtonColor
+     * @param string|null $swalShowClass
      * @return self
      */
-    public function setCancelButtonColor(?string $cancelButtonColor): self
+    public function setSwalShowClass(?string $swalShowClass): self
     {
-        $this->cancelButtonColor = $cancelButtonColor;
+        $this->swalShowClass = $swalShowClass;
         return $this;
     }
 
     /**
-     * @param int $width
+     * @param string|null $swalHideClass
      * @return self
      */
-    public function setWidth(int $width): self
+    public function setSwalHideClass(?string $swalHideClass): self
     {
-        $this->width = $width;
+        $this->swalHideClass = $swalHideClass;
         return $this;
     }
 
     /**
-     * @param string|null $padding
+     * @param string|null $swalConfirmButtonColor
      * @return self
      */
-    public function setPadding(?string $padding): self
+    public function setSwalConfirmButtonColor(?string $swalConfirmButtonColor): self
     {
-        $this->padding = $padding;
+        $this->swalConfirmButtonColor = $swalConfirmButtonColor;
         return $this;
     }
 
     /**
-     * @param string|null $background
+     * @param string|null $swalCancelButtonColor
      * @return self
      */
-    public function setBackground(?string $background): self
+    public function setSwalCancelButtonColor(?string $swalCancelButtonColor): self
     {
-        $this->background = $background;
+        $this->swalCancelButtonColor = $swalCancelButtonColor;
         return $this;
     }
 
     /**
-     * @param string|null $backdrop
+     * @param int $swalWidth
      * @return self
      */
-    public function setBackdrop(?string $backdrop): self
+    public function setSwalWidth(int $swalWidth): self
     {
-        $this->backdrop = $backdrop;
+        $this->swalWidth = $swalWidth;
         return $this;
     }
 
     /**
-     * @param bool $timerProgressBar
+     * @param string|null $swalPadding
      * @return self
      */
-    public function setTimerProgressBar(bool $timerProgressBar): self
+    public function setSwalPadding(?string $swalPadding): self
     {
-        $this->timerProgressBar = $timerProgressBar;
+        $this->swalPadding = $swalPadding;
         return $this;
     }
 
     /**
-     * @param string|null $didOpen
+     * @param string|null $swalBackground
      * @return self
      */
-    public function setDidOpen(?string $didOpen): self
+    public function setSwalBackground(?string $swalBackground): self
     {
-        $this->didOpen = $didOpen;
+        $this->swalBackground = $swalBackground;
         return $this;
     }
 
     /**
-     * @param string|null $willClose
+     * @param string|null $swalBackdrop
      * @return self
      */
-    public function setWillClose(?string $willClose): self
+    public function setSwalBackdrop(?string $swalBackdrop): self
     {
-        $this->willClose = $willClose;
+        $this->swalBackdrop = $swalBackdrop;
         return $this;
     }
 
     /**
-     * @param string|null $iconHtml
+     * @param bool $swalTimerProgressBar
      * @return self
      */
-    public function setIconHtml(?string $iconHtml): self
+    public function setSwalTimerProgressBar(bool $swalTimerProgressBar): self
     {
-        $this->iconHtml = $iconHtml;
+        $this->swalTimerProgressBar = $swalTimerProgressBar;
+        return $this;
+    }
+
+    /**
+     * @param string|null $swalDidOpen
+     * @return self
+     */
+    public function setSwalDidOpen(?string $swalDidOpen): self
+    {
+        $this->swalDidOpen = $swalDidOpen;
+        return $this;
+    }
+
+    /**
+     * @param string|null $swalWillClose
+     * @return self
+     */
+    public function setSwalWillClose(?string $swalWillClose): self
+    {
+        $this->swalWillClose = $swalWillClose;
+        return $this;
+    }
+
+    /**
+     * @param string|null $swalIconHtml
+     * @return self
+     */
+    public function setSwalIconHtml(?string $swalIconHtml): self
+    {
+        $this->swalIconHtml = $swalIconHtml;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getTitle(): ?string
+    public function getSwalIcon(): ?string
     {
-        return $this->title;
+        return $this->swalIcon;
     }
 
     /**
      * @return string|null
      */
-    public function getFooter(): ?string
+    public function getSwalText(): ?string
     {
-        return $this->footer;
+        return $this->swalText;
     }
 
     /**
      * @return string|null
      */
-    public function getImageUrl(): ?string
+    public function getSwalPosition(): ?string
     {
-        return $this->imageUrl;
+        return $this->swalPosition;
     }
 
     /**
      * @return string|null
      */
-    public function getImageAlt(): ?string
+    public function getSwalTitle(): ?string
     {
-        return $this->imageAlt;
+        return $this->swalTitle;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSwalFooter(): ?string
+    {
+        return $this->swalFooter;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSwalImageUrl(): ?string
+    {
+        return $this->swalImageUrl;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSwalImageAlt(): ?string
+    {
+        return $this->swalImageAlt;
     }
 
     /**
      * @return int
      */
-    public function getImageHeight(): int
+    public function getSwalImageHeight(): int
     {
-        return $this->imageHeight;
+        return $this->swalImageHeight;
     }
 
     /**
      * @return int
      */
-    public function getImageWidth(): int
+    public function getSwalImageWidth(): int
     {
-        return $this->imageWidth;
+        return $this->swalImageWidth;
     }
 
     /**
      * @return string|null
      */
-    public function getHtml(): ?string
+    public function getSwalHtml(): ?string
     {
-        return $this->html;
+        return $this->swalHtml;
     }
 
     /**
      * @return bool
      */
-    public function isShowCloseButton(): bool
+    public function isSwalShowCloseButton(): bool
     {
-        return $this->showCloseButton;
+        return $this->swalShowCloseButton;
     }
 
     /**
      * @return bool
      */
-    public function isShowCancelButton(): bool
+    public function isSwalShowCancelButton(): bool
     {
-        return $this->showCancelButton;
+        return $this->swalShowCancelButton;
     }
 
     /**
      * @return bool
      */
-    public function isFocusConfirm(): bool
+    public function isSwalFocusConfirm(): bool
     {
-        return $this->focusConfirm;
+        return $this->swalFocusConfirm;
     }
 
     /**
      * @return string|null
      */
-    public function getConfirmButtonText(): ?string
+    public function getSwalConfirmButtonText(): ?string
     {
-        return $this->confirmButtonText;
+        return $this->swalConfirmButtonText;
     }
 
     /**
      * @return string|null
      */
-    public function getConfirmButtonAriaLabel(): ?string
+    public function getSwalConfirmButtonAriaLabel(): ?string
     {
-        return $this->confirmButtonAriaLabel;
+        return $this->swalConfirmButtonAriaLabel;
     }
 
     /**
      * @return string|null
      */
-    public function getCancelButtonText(): ?string
+    public function getSwalCancelButtonText(): ?string
     {
-        return $this->cancelButtonText;
+        return $this->swalCancelButtonText;
     }
 
     /**
      * @return string|null
      */
-    public function getCancelButtonAriaLabel(): ?string
+    public function getSwalCancelButtonAriaLabel(): ?string
     {
-        return $this->cancelButtonAriaLabel;
+        return $this->swalCancelButtonAriaLabel;
     }
 
     /**
      * @return bool
      */
-    public function isShowDenyButton(): bool
+    public function isSwalShowDenyButton(): bool
     {
-        return $this->showDenyButton;
+        return $this->swalShowDenyButton;
     }
 
     /**
      * @return string|null
      */
-    public function getDenyButtonText(): ?string
+    public function getSwalDenyButtonText(): ?string
     {
-        return $this->denyButtonText;
+        return $this->swalDenyButtonText;
     }
 
     /**
      * @return bool
      */
-    public function isShowConfirmButton(): bool
+    public function isSwalShowConfirmButton(): bool
     {
-        return $this->showConfirmButton;
+        return $this->swalShowConfirmButton;
     }
 
     /**
      * @return int
      */
-    public function getTimer(): int
+    public function getSwalTimer(): int
     {
-        return $this->timer;
+        return $this->swalTimer;
     }
 
     /**
      * @return string|null
      */
-    public function getShowClass(): ?string
+    public function getSwalShowClass(): ?string
     {
-        return $this->showClass;
+        return $this->swalShowClass;
     }
 
     /**
      * @return string|null
      */
-    public function getHideClass(): ?string
+    public function getSwalHideClass(): ?string
     {
-        return $this->hideClass;
+        return $this->swalHideClass;
     }
 
     /**
      * @return string|null
      */
-    public function getConfirmButtonColor(): ?string
+    public function getSwalConfirmButtonColor(): ?string
     {
-        return $this->confirmButtonColor;
+        return $this->swalConfirmButtonColor;
     }
 
     /**
      * @return string|null
      */
-    public function getCancelButtonColor(): ?string
+    public function getSwalCancelButtonColor(): ?string
     {
-        return $this->cancelButtonColor;
+        return $this->swalCancelButtonColor;
     }
 
     /**
      * @return int
      */
-    public function getWidth(): int
+    public function getSwalWidth(): int
     {
-        return $this->width;
+        return $this->swalWidth;
     }
 
     /**
      * @return string|null
      */
-    public function getPadding(): ?string
+    public function getSwalPadding(): ?string
     {
-        return $this->padding;
+        return $this->swalPadding;
     }
 
     /**
      * @return string|null
      */
-    public function getBackground(): ?string
+    public function getSwalBackground(): ?string
     {
-        return $this->background;
+        return $this->swalBackground;
     }
 
     /**
      * @return string|null
      */
-    public function getBackdrop(): ?string
+    public function getSwalBackdrop(): ?string
     {
-        return $this->backdrop;
+        return $this->swalBackdrop;
     }
 
     /**
      * @return bool
      */
-    public function isTimerProgressBar(): bool
+    public function isSwalTimerProgressBar(): bool
     {
-        return $this->timerProgressBar;
+        return $this->swalTimerProgressBar;
     }
 
     /**
      * @return string|null
      */
-    public function getDidOpen(): ?string
+    public function getSwalDidOpen(): ?string
     {
-        return $this->didOpen;
+        return $this->swalDidOpen;
     }
 
     /**
      * @return string|null
      */
-    public function getWillClose(): ?string
+    public function getSwalWillClose(): ?string
     {
-        return $this->willClose;
+        return $this->swalWillClose;
     }
 
     /**
      * @return string|null
      */
-    public function getIconHtml(): ?string
+    public function getSwalIconHtml(): ?string
     {
-        return $this->iconHtml;
+        return $this->swalIconHtml;
     }
-    
+
 }

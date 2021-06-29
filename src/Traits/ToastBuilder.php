@@ -5,234 +5,293 @@ namespace Simtabi\Laratoast\Traits;
 trait ToastBuilder
 {
 
-    public ?string $heading             = 'Note'; // Optional heading to be shown on the toast
-    public ?string $showHideTransition  = 'fade'; // fade; slide or plain
-    public bool    $allowToastClose     = true; // Boolean value true or false
-    public int     $hideAfter           = 3000; // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
-    public int     $stack               = 20; // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+    public ?string $toastIcon                = 'warning'; // Type of toast icon
+    public ?string $toastText                = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
+    public ?string $toastPosition            = 'top-right'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 
-    public ?string $textAlign           = 'left';  // Text alignment i.e. left, right or center
-    public bool    $loader              = true;  // Whether to show loader or not. True by default
-    public ?string $loaderBg            = '#9EC600';  // Background color of the toast loader
-    public ?string $beforeShow          = 'function () {}'; // will be triggered before the toast is shown
-    public ?string $afterShown          = 'function () {}'; // will be triggered after the toat has been shown
-    public ?string $beforeHide          = 'function () {}'; // will be triggered before the toast gets hidden
-    public ?string $afterHidden         = 'function () {}'; // will be triggered after the toast has been hidden
+
+    public ?string $toastHeading             = 'Note'; // Optional heading to be shown on the toast
+    public ?string $toastShowHideTransition  = 'fade'; // fade; slide or plain
+    public bool    $toastAllowToastClose     = true; // Boolean value true or false
+    public int     $toastHideAfter           = 3000; // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+    public int     $toastStack               = 20; // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+
+    public ?string $toastTextAlign           = 'left';  // Text alignment i.e. left, right or center
+    public bool    $toastLoader              = true;  // Whether to show loader or not. True by default
+    public ?string $toastLoaderBg            = '#9EC600';  // Background color of the toast loader
+    public ?string $toastBeforeShow          = 'function () {}'; // will be triggered before the toast is shown
+    public ?string $toastAfterShown          = 'function () {}'; // will be triggered after the toat has been shown
+    public ?string $toastBeforeHide          = 'function () {}'; // will be triggered before the toast gets hidden
+    public ?string $toastAfterHidden         = 'function () {}'; // will be triggered after the toast has been hidden
 
     /**
-     * @param string|null $heading
+     * @param string|null $toastIcon
      * @return self
      */
-    public function setHeading(?string $heading): self
+    public function setToastIcon(?string $toastIcon): self
     {
-        $this->heading = $heading;
+        $this->toastIcon = $toastIcon;
         return $this;
     }
 
     /**
-     * @param string|null $showHideTransition
+     * @param string|null $toastText
      * @return self
      */
-    public function setShowHideTransition(?string $showHideTransition): self
+    public function setToastText(?string $toastText): self
     {
-        $this->showHideTransition = $showHideTransition;
+        $this->toastText = $toastText;
         return $this;
     }
 
     /**
-     * @param bool $allowToastClose
+     * @param string|null $toastPosition
      * @return self
      */
-    public function setAllowToastClose(bool $allowToastClose): self
+    public function setToastPosition(?string $toastPosition): self
     {
-        $this->allowToastClose = $allowToastClose;
+        $this->toastPosition = $toastPosition;
         return $this;
     }
 
     /**
-     * @param int $hideAfter
+     * @param string|null $toastHeading
      * @return self
      */
-    public function setHideAfter(int $hideAfter): self
+    public function setToastHeading(?string $toastHeading): self
     {
-        $this->hideAfter = $hideAfter;
+        $this->toastHeading = $toastHeading;
         return $this;
     }
 
     /**
-     * @param int $stack
+     * @param string|null $toastShowHideTransition
      * @return self
      */
-    public function setStack(int $stack): self
+    public function setToastShowHideTransition(?string $toastShowHideTransition): self
     {
-        $this->stack = $stack;
+        $this->toastShowHideTransition = $toastShowHideTransition;
         return $this;
     }
 
     /**
-     * @param string|null $textAlign
+     * @param bool $toastAllowToastClose
      * @return self
      */
-    public function setTextAlign(?string $textAlign): self
+    public function setToastAllowToastClose(bool $toastAllowToastClose): self
     {
-        $this->textAlign = $textAlign;
+        $this->toastAllowToastClose = $toastAllowToastClose;
         return $this;
     }
 
     /**
-     * @param bool $loader
+     * @param int $toastHideAfter
      * @return self
      */
-    public function setLoader(bool $loader): self
+    public function setToastHideAfter(int $toastHideAfter): self
     {
-        $this->loader = $loader;
+        $this->toastHideAfter = $toastHideAfter;
         return $this;
     }
 
     /**
-     * @param string|null $loaderBg
+     * @param int $toastStack
      * @return self
      */
-    public function setLoaderBg(?string $loaderBg): self
+    public function setToastStack(int $toastStack): self
     {
-        $this->loaderBg = $loaderBg;
+        $this->toastStack = $toastStack;
         return $this;
     }
 
     /**
-     * @param string|null $beforeShow
+     * @param string|null $toastTextAlign
      * @return self
      */
-    public function setBeforeShow(?string $beforeShow): self
+    public function setToastTextAlign(?string $toastTextAlign): self
     {
-        $this->beforeShow = $beforeShow;
+        $this->toastTextAlign = $toastTextAlign;
         return $this;
     }
 
     /**
-     * @param string|null $afterShown
+     * @param bool $toastLoader
      * @return self
      */
-    public function setAfterShown(?string $afterShown): self
+    public function setToastLoader(bool $toastLoader): self
     {
-        $this->afterShown = $afterShown;
+        $this->toastLoader = $toastLoader;
         return $this;
     }
 
     /**
-     * @param string|null $beforeHide
+     * @param string|null $toastLoaderBg
      * @return self
      */
-    public function setBeforeHide(?string $beforeHide): self
+    public function setToastLoaderBg(?string $toastLoaderBg): self
     {
-        $this->beforeHide = $beforeHide;
+        $this->toastLoaderBg = $toastLoaderBg;
         return $this;
     }
 
     /**
-     * @param string|null $afterHidden
+     * @param string|null $toastBeforeShow
      * @return self
      */
-    public function setAfterHidden(?string $afterHidden): self
+    public function setToastBeforeShow(?string $toastBeforeShow): self
     {
-        $this->afterHidden = $afterHidden;
+        $this->toastBeforeShow = $toastBeforeShow;
+        return $this;
+    }
+
+    /**
+     * @param string|null $toastAfterShown
+     * @return self
+     */
+    public function setToastAfterShown(?string $toastAfterShown): self
+    {
+        $this->toastAfterShown = $toastAfterShown;
+        return $this;
+    }
+
+    /**
+     * @param string|null $toastBeforeHide
+     * @return self
+     */
+    public function setToastBeforeHide(?string $toastBeforeHide): self
+    {
+        $this->toastBeforeHide = $toastBeforeHide;
+        return $this;
+    }
+
+    /**
+     * @param string|null $toastAfterHidden
+     * @return self
+     */
+    public function setToastAfterHidden(?string $toastAfterHidden): self
+    {
+        $this->toastAfterHidden = $toastAfterHidden;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getHeading(): ?string
+    public function getToastIcon(): ?string
     {
-        return $this->heading;
+        return $this->toastIcon;
     }
 
     /**
      * @return string|null
      */
-    public function getShowHideTransition(): ?string
+    public function getToastText(): ?string
     {
-        return $this->showHideTransition;
+        return $this->toastText;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToastPosition(): ?string
+    {
+        return $this->toastPosition;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToastHeading(): ?string
+    {
+        return $this->toastHeading;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToastShowHideTransition(): ?string
+    {
+        return $this->toastShowHideTransition;
     }
 
     /**
      * @return bool
      */
-    public function isAllowToastClose(): bool
+    public function isToastAllowToastClose(): bool
     {
-        return $this->allowToastClose;
+        return $this->toastAllowToastClose;
     }
 
     /**
      * @return int
      */
-    public function getHideAfter(): int
+    public function getToastHideAfter(): int
     {
-        return $this->hideAfter;
+        return $this->toastHideAfter;
     }
 
     /**
      * @return int
      */
-    public function getStack(): int
+    public function getToastStack(): int
     {
-        return $this->stack;
+        return $this->toastStack;
     }
 
     /**
      * @return string|null
      */
-    public function getTextAlign(): ?string
+    public function getToastTextAlign(): ?string
     {
-        return $this->textAlign;
+        return $this->toastTextAlign;
     }
 
     /**
      * @return bool
      */
-    public function isLoader(): bool
+    public function isToastLoader(): bool
     {
-        return $this->loader;
+        return $this->toastLoader;
     }
 
     /**
      * @return string|null
      */
-    public function getLoaderBg(): ?string
+    public function getToastLoaderBg(): ?string
     {
-        return $this->loaderBg;
+        return $this->toastLoaderBg;
     }
 
     /**
      * @return string|null
      */
-    public function getBeforeShow(): ?string
+    public function getToastBeforeShow(): ?string
     {
-        return $this->beforeShow;
+        return $this->toastBeforeShow;
     }
 
     /**
      * @return string|null
      */
-    public function getAfterShown(): ?string
+    public function getToastAfterShown(): ?string
     {
-        return $this->afterShown;
+        return $this->toastAfterShown;
     }
 
     /**
      * @return string|null
      */
-    public function getBeforeHide(): ?string
+    public function getToastBeforeHide(): ?string
     {
-        return $this->beforeHide;
+        return $this->toastBeforeHide;
     }
 
     /**
      * @return string|null
      */
-    public function getAfterHidden(): ?string
+    public function getToastAfterHidden(): ?string
     {
-        return $this->afterHidden;
-    } 
-    
+        return $this->toastAfterHidden;
+    }
+
 }
