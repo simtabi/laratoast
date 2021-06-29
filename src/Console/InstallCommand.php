@@ -51,12 +51,12 @@ class InstallCommand extends Command
         copy(self::PATH.'resources/views/laratoast-scripts.blade.php', resource_path('views/vendor/laratoast-scripts.blade.php'));
 
         // JS Scripts
-        (new Filesystem)->ensureDirectoryExists(base_path('vendor/laratoast'));
-        (new Filesystem)->ensureDirectoryExists(base_path('vendor/laratoast/css'));
-        (new Filesystem)->ensureDirectoryExists(base_path('vendor/laratoast/js'));
+        (new Filesystem)->ensureDirectoryExists(public_path('vendor/laratoast'));
+        (new Filesystem)->ensureDirectoryExists(public_path('vendor/laratoast/css'));
+        (new Filesystem)->ensureDirectoryExists(public_path('vendor/laratoast/js'));
 
-        copy(self::PATH.'public/css/jquery.toast.css',  base_path('vendor/laratoast/css'));
-        copy(self::PATH.'public/js/jquery.toast.js',  base_path('vendor/laratoast/js'));
+        copy(self::PATH.'public/css/jquery.toast.css',  public_path('vendor/laratoast/css/jquery.toast.css'));
+        copy(self::PATH.'public/js/jquery.toast.js',  public_path('vendor/laratoast/js/jquery.toast.js'));
 
         $this->info('Laratoast resources installed successfully.');
         $this->comment('Please execute the "npm install && npm run dev" command to build your assets.');

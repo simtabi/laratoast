@@ -77,15 +77,15 @@ class LaratoastServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 self::PATH . 'config/laratoast.php' => config_path('laratoast.php'),
-            ], 'laratoast:config');
+            ], 'laratoast-config');
 
             $this->publishes([
                 self::PATH . 'public'               => public_path('vendor/laratoast'),
-            ], 'laratoast:assets');
+            ], 'laratoast-assets');
 
             $this->publishes([
                 self::PATH . 'resources/views'      => resource_path('views/vendor/laratoast'),
-            ], 'laratoast:views');
+            ], 'laratoast-views');
         }
     }
 

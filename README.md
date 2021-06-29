@@ -1,11 +1,11 @@
-# Laratoast
+# Laratoast  <!-- omit in toc -->
 
 Integrate livewire with sweetalert.
 
 - [Installation](#installation)
 - [How to use](#how-to-use)
+- [Sweetalert](#sweetalert)
 - [Toast](#toast)
-- [Fire](#fire)
 - [Available configuration](#available-configuration)
 
 ## [Installation](https://packagist.org/packages/simtabi/laratoast)
@@ -26,38 +26,40 @@ Integrate livewire with sweetalert.
 
 ```blade
     ...
-    @livewireScripts
-    @laratoastScripts // or whenever you need
+    @livewireStyles   // place this directive in the header
+    @laratoastScripts // this has already been loaded in init file
     ...
 ```
 
 ### 3. Extra config file <!-- omit in toc -->
 
+Publish the configs: `php artisan vendor:publish --tag=laratoast-assets`.
 Publish the configs: `php artisan vendor:publish --tag=laratoast-config`.
+Publish the configs: `php artisan vendor:publish --tag=laratoast-views`.
 > See [available configuration](#available-configuration)
 
 ---
 
-## Toast
+## Sweetalert
 
 In your component add `Toast` trait. Then call `toast` method whenever you want.
 
 ```php
-use Simtabi\Laratoast\FireToast;
+use Simtabi\Laratoast\HasLaratoasts;
 use Livewire\Component;
 
 class MyComponent extends Component
 {
-    use FireToast;
+    use HasLaratoasts;
 
     public function save() {
-        $this->toast('Toast message', 'success', 5000)
+        $this->fireSweetalertModal($titleText, $icon = null, $html = null, $options = []);
     }
-    ...
+    
 }
 ```
 
-**toast parameters:**
+**sweetalert parameters:**
 
 - title
 - [icon](https://sweetalert2.github.io/#icons): success, error, warning, info, question - default is **info**
@@ -65,32 +67,28 @@ class MyComponent extends Component
 -
 ---
 
-## Fire
+## Toast
 
 This is the normal sweetalert [modal](https://sweetalert2.github.io/#examples). In your component add `Fire` trait. Then call `fire` method whenever you want.
 
 ```php
-use Simtabi\Laratoast\FireSwal;
+use Simtabi\Laratoast\HasLaratoasts;
 use Livewire\Component;
 
 class MyComponent extends Component
 {
-    use FireSwal;
+    use HasLaratoasts;
 
     public function save() {
-        $options = [];
-        $this->Fire('Error happened', 'error', 'please try again later', $options)
+        $this->fireToastNotification($titleText, $icon = 'info', $timeout = 5000, $options = []);
     }
-    ...
+  
 }
 ```
 
-**fire parameters:**
+**toast parameters:**
 
-- titleText: The title of the popup, as text to avoid HTML injection.
-- [icon](https://sweetalert2.github.io/#icons): success, error, warning, info, question - default is **info**.
-- html: the html which is displayed under the title.
-- options: [all options](https://sweetalert2.github.io/#configuration) that sweetalert provides.
+Refer to the documentation online at: [https://github.com/kamranahmedse/jquery-toast-plugin](https://github.com/kamranahmedse/jquery-toast-plugin) 
 
 ---
 
