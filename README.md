@@ -26,8 +26,14 @@ Integrate livewire with sweetalert.
 
 ```blade
     ...
-    @livewireStyles   // place this directive in the header
-    @laratoastScripts // this has already been loaded in init file
+    // place this directive in the header
+    @laratoastUIStyles
+
+    // no need to call this, as it has already been called when you call @laratoastLoadUIScripts
+    @laratoastUIScripts
+
+    // no need to include this as it has already been loaded in init file
+    @laratoastLoadUIScripts
     ...
 ```
 
@@ -55,7 +61,7 @@ class MyComponent extends Component
     public function save() {
         $this->fireSweetalertModal($titleText, $icon = null, $html = null, $options = []);
     }
-    
+
 }
 ```
 
@@ -82,13 +88,13 @@ class MyComponent extends Component
     public function save() {
         $this->fireToastNotification($titleText, $icon = 'info', $timeout = 5000, $options = []);
     }
-  
+
 }
 ```
 
 **toast parameters:**
 
-Refer to the documentation online at: [https://github.com/kamranahmedse/jquery-toast-plugin](https://github.com/kamranahmedse/jquery-toast-plugin) 
+Refer to the documentation online at: [https://github.com/kamranahmedse/jquery-toast-plugin](https://github.com/kamranahmedse/jquery-toast-plugin)
 
 ---
 

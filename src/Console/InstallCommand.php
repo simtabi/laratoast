@@ -47,7 +47,6 @@ class InstallCommand extends Command
 
         (new Filesystem)->copyDirectory(self::PATH.'resources/views', resource_path('views/vendor'));
 
-        copy(self::PATH.'resources/views/laratoast-styles.blade.php', resource_path('views/vendor/laratoast-styles.blade.php'));
         copy(self::PATH.'resources/views/laratoast-scripts.blade.php', resource_path('views/vendor/laratoast-scripts.blade.php'));
 
         // JS Scripts

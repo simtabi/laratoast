@@ -8,11 +8,10 @@ trait LaratoastBuilder
 
     use SweetalertBuilder,
         ToastBuilder;
-    
+
     public ?string $icon     = 'warning'; // Type of toast icon
     public ?string $text     = "Don't forget to star the repository if you like it."; // Text that is to be shown in the toast
     public ?string $position = 'bottom-left'; // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-
 
     /**
      * @param string|null $icon
@@ -43,7 +42,7 @@ trait LaratoastBuilder
         $this->position = $position;
         return $this;
     }
-    
+
     /**
      * @return string|null
      */
@@ -67,9 +66,9 @@ trait LaratoastBuilder
     {
         return $this->position;
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 }

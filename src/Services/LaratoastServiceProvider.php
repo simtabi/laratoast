@@ -20,8 +20,8 @@ class LaratoastServiceProvider extends ServiceProvider
         ],
     ];
     public static array $assets = [
-        'styles'  => 'toaster.css',
-        'scripts' => 'toaster.js',
+        'styles'  => 'jquery.toast.css',
+        'scripts' => 'jquery.toast.js',
     ];
 
     /**
@@ -48,7 +48,7 @@ class LaratoastServiceProvider extends ServiceProvider
         $this->loadViewsFrom(self::PATH . 'resources/views', 'laratoast');
 
         // inject required javascript
-        Blade::include('laratoast::js', 'laratoastInit');
+        Blade::include('laratoast::laratoast-scripts', 'laratoastLoadUIScripts');
 
         $this->registerDirectives();
         $this->registerPublishables();
@@ -108,7 +108,7 @@ class LaratoastServiceProvider extends ServiceProvider
     private function getComponentStyles()
     {
         return collect(self::$assets['styles'])->map(function($item) {
-            return asset("/vendor/laratoast/{$item}");
+            return asset("/vendor/laratoast/css/{$item}");
         })->flatten()->map(function($styleUrl) {
             return '<link media="all" type="text/css" rel="stylesheet" href="' . $styleUrl . '">';
         })->implode(PHP_EOL);
@@ -117,7 +117,7 @@ class LaratoastServiceProvider extends ServiceProvider
     private function getComponentScripts()
     {
         return collect(self::$assets['scripts'])->map(function($item) {
-            return asset("/vendor/laratoast/{$item}");
+            return asset("/vendor/laratoast/js/{$item}");
         })->flatten()->map(function($scriptUrl) {
             return !empty($scriptUrl) ? '<script src="' . $scriptUrl . '"></script>' : '';
         })->implode(PHP_EOL);
@@ -126,8 +126,8 @@ class LaratoastServiceProvider extends ServiceProvider
 
     private function getComponentCdnStyles()
     {
-        return collect(self::$assets['styles'])->map(function($item) {
-            return asset("/vendor/laratoast/{$item}");
+        return collect(self::$cdnAssets['styles'])->map(function($item) {
+            return $item;
         })->flatten()->map(function($styleUrl) {
             return !empty($styleUrl) ? '<link media="all" type="text/css" rel="stylesheet" href="' . $styleUrl . '">' : '';
         })->implode(PHP_EOL);
@@ -135,8 +135,8 @@ class LaratoastServiceProvider extends ServiceProvider
 
     private function getComponentCdnScripts()
     {
-        return collect(self::$assets['scripts'])->map(function($item) {
-            return asset("/vendor/laratoast/{$item}");
+        return collect(self::$cdnAssets['scripts'])->map(function($item) {
+            return $item;
         })->flatten()->map(function($scriptUrl) {
             return !empty($scriptUrl) ? '<script src="' . $scriptUrl . '"></script>' : '';
         })->implode(PHP_EOL);

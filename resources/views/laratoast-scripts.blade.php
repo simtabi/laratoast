@@ -1,4 +1,3 @@
-
 @laratoastUIScripts
 
 <script>
