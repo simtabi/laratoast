@@ -46,6 +46,9 @@ Publish the configs: `php artisan vendor:publish --tag=laratoast-views`.
 
 ---
 
+## Building toasts and sweetalerts
+To make it easy to build toasts and sweetalerts, we have implemented chained methods to help you with building
+
 ## Sweetalert
 
 In your component add `Toast` trait. Then call `toast` method whenever you want.
@@ -59,7 +62,7 @@ class MyComponent extends Component
     use HasLaratoasts;
 
     public function save() {
-        $this->fireSweetalertModal($titleText, $icon = null, $html = null, $options = []);
+        $this->fireSweetalertModal();
     }
 
 }
@@ -86,7 +89,7 @@ class MyComponent extends Component
     use HasLaratoasts;
 
     public function save() {
-        $this->fireToastNotification($titleText, $icon = 'info', $timeout = 5000, $options = []);
+        $this->fireToastNotification();
     }
 
 }
