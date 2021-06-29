@@ -13,7 +13,7 @@ trait HasLaratoasts
      *
      * @return false|mixed
      */
-    public function fireToastForValidationError()
+    public function fireToastFromValidationError()
     {
         $errorBag = $this->getErrorBag()->all();
 
@@ -30,61 +30,61 @@ trait HasLaratoasts
      */
     public function fireSweetalertModal()
     {
-       return $this->emit('swal:fire', [
-            'icon'                   => $this->swalIcon,
-            'text'                   => $this->swalText,
-            'position'               => $this->swalPosition,
+        return $this->emit('swal:fire', [
+                'icon'                   => $this->swalIcon,
+                'text'                   => $this->swalText,
+                'position'               => $this->swalPosition,
 
-            // defaults
-            'title'                  => $this->swalTitle,
-            'footer'                 => $this->swalFooter,
+                // defaults
+                'title'                  => $this->swalTitle,
+                'footer'                 => $this->swalFooter,
 
-            // with image
-            'imageUrl'               => $this->swalImageUrl,
-            'imageAlt'               => $this->swalImageAlt,
-            'imageHeight'            => $this->swalImageHeight,
-            'imageWidth'             => $this->swalImageWidth,
+                // with image
+                'imageUrl'               => $this->swalImageUrl,
+                'imageAlt'               => $this->swalImageAlt,
+                'imageHeight'            => $this->swalImageHeight,
+                'imageWidth'             => $this->swalImageWidth,
 
-            // with html
-            'html'                   => $this->swalHtml,
-            'showCloseButton'        => $this->swalShowCloseButton,
-            'showCancelButton'       => $this->swalShowCancelButton,
-            'focusConfirm'           => $this->swalFocusConfirm,
-            'confirmButtonText'      => $this->swalConfirmButtonText,
-            'confirmButtonAriaLabel' => $this->swalConfirmButtonAriaLabel,
-            'cancelButtonText'       => $this->swalCancelButtonText,
-            'cancelButtonAriaLabel'  => $this->swalCancelButtonAriaLabel,
+                // with html
+                'html'                   => $this->swalHtml,
+                'showCloseButton'        => $this->swalShowCloseButton,
+                'showCancelButton'       => $this->swalShowCancelButton,
+                'focusConfirm'           => $this->swalFocusConfirm,
+                'confirmButtonText'      => $this->swalConfirmButtonText,
+                'confirmButtonAriaLabel' => $this->swalConfirmButtonAriaLabel,
+                'cancelButtonText'       => $this->swalCancelButtonText,
+                'cancelButtonAriaLabel'  => $this->swalCancelButtonAriaLabel,
 
-            // dialog with 3 buttons
-            'showDenyButton'         => $this->swalShowDenyButton,
-            'denyButtonText'         => $this->swalDenyButtonText,
+                // dialog with 3 buttons
+                'showDenyButton'         => $this->swalShowDenyButton,
+                'denyButtonText'         => $this->swalDenyButtonText,
 
-            // with custom position
-            'showConfirmButton'      => $this->swalShowConfirmButton,
-            'timer'                  => $this->swalTimer,
+                // with custom position
+                'showConfirmButton'      => $this->swalShowConfirmButton,
+                'timer'                  => $this->swalTimer,
 
-            // with animate css
-            'showClass'              => $this->swalShowClass,
-            'hideClass'              => $this->swalHideClass,
+                // with animate css
+                'showClass'              => $this->swalShowClass,
+                'hideClass'              => $this->swalHideClass,
 
-            // confirm dialog
-            'confirmButtonColor'     => $this->swalConfirmButtonColor,
-            'cancelButtonColor'      => $this->swalCancelButtonColor,
+                // confirm dialog
+                'confirmButtonColor'     => $this->swalConfirmButtonColor,
+                'cancelButtonColor'      => $this->swalCancelButtonColor,
 
-            // custom width/padding
-            'width'                  => $this->swalWidth,
-            'padding'                => $this->swalPadding,
-            'background'             => $this->swalBackground,
-            'backdrop'               => $this->swalBackdrop,
+                // custom width/padding
+                'width'                  => $this->swalWidth,
+                'padding'                => $this->swalPadding,
+                'background'             => $this->swalBackground,
+                'backdrop'               => $this->swalBackdrop,
 
-            // autoclose timer
-            'timerProgressBar'      => $this->swalTimerProgressBar,
-            'didOpen'               => $this->swalDidOpen,
-            'willClose'             => $this->swalWillClose,
+                // autoclose timer
+                'timerProgressBar'      => $this->swalTimerProgressBar,
+                'didOpen'               => $this->swalDidOpen,
+                'willClose'             => $this->swalWillClose,
 
-            // with rtl
-            'iconHtml'              => $this->swalIconHtml,
-        ]);
+                // with rtl
+                'iconHtml'              => $this->swalIconHtml,
+            ]);
     }
 
     /**
@@ -95,24 +95,24 @@ trait HasLaratoasts
     public function fireToastNotification()
     {
         return $this->emit('toast:fire', [
-            'icon'               => $this->toastIcon,
-            'text'               => $this->toastText,
-            'position'           => $this->toastPosition,
+                'icon'               => $this->toastIcon,
+                'text'               => $this->toastText,
+                'position'           => $this->toastPosition,
 
-            'heading'            => $this->toastHeading,
-            'showHideTransition' => $this->toastShowHideTransition,
-            'allowToastClose'    => $this->toastAllowToastClose,
-            'hideAfter'          => $this->toastHideAfter,
-            'stack'              => $this->toastStack,
+                'heading'            => $this->toastHeading,
+                'showHideTransition' => $this->toastShowHideTransition,
+                'allowToastClose'    => $this->toastAllowToastClose,
+                'hideAfter'          => $this->toastHideAfter,
+                'stack'              => $this->toastStack,
 
-            'textAlign'          => $this->toastTextAlign,
-            'loader'             => $this->toastLoader,
-            'loaderBg'           => $this->toastLoaderBg,
-            'beforeShow'         => $this->toastBeforeShow,
-            'afterShown'         => $this->toastAfterShown,
-            'beforeHide'         => $this->toastBeforeHide,
-            'afterHidden'        => $this->toastAfterHidden,
-        ]);
+                'textAlign'          => $this->toastTextAlign,
+                'loader'             => $this->toastLoader,
+                'loaderBg'           => $this->toastLoaderBg,
+                'beforeShow'         => $this->toastBeforeShow,
+                'afterShown'         => $this->toastAfterShown,
+                'beforeHide'         => $this->toastBeforeHide,
+                'afterHidden'        => $this->toastAfterHidden,
+            ]);
     }
 
 }

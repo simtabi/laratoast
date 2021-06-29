@@ -19,10 +19,10 @@ trait ToastBuilder
     public ?string $toastTextAlign           = 'left';  // Text alignment i.e. left, right or center
     public bool    $toastLoader              = true;  // Whether to show loader or not. True by default
     public ?string $toastLoaderBg            = '#9EC600';  // Background color of the toast loader
-    public ?string $toastBeforeShow          = 'function () {}'; // will be triggered before the toast is shown
-    public ?string $toastAfterShown          = 'function () {}'; // will be triggered after the toat has been shown
-    public ?string $toastBeforeHide          = 'function () {}'; // will be triggered before the toast gets hidden
-    public ?string $toastAfterHidden         = 'function () {}'; // will be triggered after the toast has been hidden
+    public ?string $toastBeforeShow          = null; // will be triggered before the toast is shown
+    public ?string $toastAfterShown          = null; // will be triggered after the toat has been shown
+    public ?string $toastBeforeHide          = null; // will be triggered before the toast gets hidden
+    public ?string $toastAfterHidden         = null; // will be triggered after the toast has been hidden
 
     /**
      * @param string|null $toastIcon
