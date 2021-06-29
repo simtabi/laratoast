@@ -1,0 +1,29 @@
+{
+  "name": "simtabi/laratoast",
+  "description": "Sweetalert and Toaster notifications for Laravel livewire",
+  "type": "library",
+  "require-dev": {
+    "orchestra/testbench": "^6.18"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Imani Manyara",
+      "email": "imani@simtabi.com",
+      "homepage": "https://simtabi.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Simtabi\\Laratoast\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Simtabi\\Laratoast\\Services\\LaratoastServiceProvider"
+      ]
+    }
+  }
+}
