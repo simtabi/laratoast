@@ -10,30 +10,26 @@ trait HasLaratoasts
     /**
      * Show toast error message if error bag has a thing
      *
-     * @return void
+     * @return false|mixed
      */
     public function fireToastForValidationError()
     {
         $errorBag = $this->getErrorBag()->all();
 
         if (count($errorBag) > 0){
-            $this->setText($errorBag[0])->fireToastNotification();
+            return $this->setText($errorBag[0])->fireToastNotification();
         }
-        return; $this;
+        return false;
     }
 
     /**
      * Popup sweetalert modal
      *
-     * @param string $titleText fire message
-     * @param string|null $icon info|warning|success|error
-     * @param string|null $html html text as subtitle
-     * @param array $options extra sweetalert options
-     * @return void
+     * @return mixed
      */
     public function fireSweetalertModal()
     {
-        $this->emit('swal:fire', [
+       return $this->emit('swal:fire', [
             'icon'                   => $this->icon,
             'text'                   => $this->text,
             'position'               => $this->position,
@@ -93,14 +89,11 @@ trait HasLaratoasts
     /**
      * Popup toast notifications
      *
-     * @param string $titleText     toast message
-     * @param string $icon          info|warning|success|error
-     * @param integer $timeout      duration to hide
      * @return void
      */
     public function fireToastNotification()
     {
-        $this->emit('toast:fire', [
+        return $this->emit('toast:fire', [
             'icon'               => $this->icon,
             'text'               => $this->text,
             'position'           => $this->position,
