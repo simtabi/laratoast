@@ -24,7 +24,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the Laratoast resources';
+    protected $description = 'Install the Laratoast resources {--views : Indicates we should install view for your customization}';
 
     /**
      * Execute the console command.
@@ -42,12 +42,14 @@ class InstallCommand extends Command
                 ] + $packages;
         });
 
-        // Views...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/vendor'));
+        if ($this->option('views')) {
+            // Views...
+            (new Filesystem)->ensureDirectoryExists(resource_path('views/vendor'));
 
-        (new Filesystem)->copyDirectory(self::PATH.'resources/views', resource_path('views/vendor'));
+            (new Filesystem)->copyDirectory(self::PATH.'resources/views', resource_path('views/vendor'));
 
-        copy(self::PATH.'resources/views/laratoast-scripts.blade.php', resource_path('views/vendor/laratoast-scripts.blade.php'));
+            copy(self::PATH.'resources/views/laratoast-scripts.blade.php', resource_path('views/vendor/laratoast-scripts.blade.php'));
+        }
 
         // JS Scripts
         (new Filesystem)->ensureDirectoryExists(public_path('vendor/laratoast'));
