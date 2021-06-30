@@ -92,11 +92,9 @@
         if (Livewire == undefined) return;
         Livewire.on('toast:fire', event => {
             return ToastNotification(event);
-            // return ToastNotification(JSON.stringify(event, undefined, 4));
         });
         Livewire.on('swal:fire', event => {
             return SwalModal(event);
-            // return SwalModal(JSON.stringify(event, undefined, 4));
         });
     });
 

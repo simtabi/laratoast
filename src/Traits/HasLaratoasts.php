@@ -13,12 +13,20 @@ trait HasLaratoasts
      *
      * @return false|mixed
      */
-    public function fireToastFromValidationError()
+    public function fireToastFromValidationError($override = true)
     {
         $errorBag = $this->getErrorBag()->all();
-
         if (count($errorBag) > 0){
-            return $this->setToastText($errorBag[0])->fireToastNotification();
+            $html = '<ul>';
+            foreach($errorBag as $error){
+                $html .= '<li>' . $error . '</li>';
+            }
+            $html .= '</ul>';
+
+            if ($override) {
+                 $this->setToastHeading('Ooops!')->setToastIcon('error');
+            }
+           return $this->setToastText($html)->fireToastNotification();
         }
         return false;
     }
