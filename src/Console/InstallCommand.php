@@ -17,14 +17,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'laratoast:install';
+    protected $signature = 'laratoast:install {--views : Indicates we should install view for your customization}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install the Laratoast resources {--views : Indicates we should install view for your customization}';
+    protected $description = 'Install the Laratoast resources';
 
     /**
      * Execute the console command.
