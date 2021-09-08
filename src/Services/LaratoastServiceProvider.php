@@ -48,7 +48,7 @@ class LaratoastServiceProvider extends ServiceProvider
         $this->loadViewsFrom(self::PATH . 'resources/views', 'laratoast');
 
         // inject required javascript
-        Blade::include('laratoast::laratoast-scripts', 'laratoastLoadUIScripts');
+        Blade::include('laratoast::laratoast-scripts', 'laratoast-scripts');
 
         $this->registerDirectives();
         $this->registerPublishables();
@@ -92,13 +92,13 @@ class LaratoastServiceProvider extends ServiceProvider
 
     private function registerDirectives()
     {
-        Blade::directive('laratoastUIStyles', function () {
+        Blade::directive('laratoast-styles', function () {
             $styles  = $this->getComponentCdnStyles();
             $styles .= $this->getComponentStyles();
             return $styles;
         });
 
-        Blade::directive('laratoastUIScripts', function () {
+        Blade::directive('laratoast-scripts', function () {
             $scripts  = $this->getComponentCdnScripts();
             $scripts .= $this->getComponentScripts();
             return $scripts;

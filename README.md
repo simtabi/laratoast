@@ -27,13 +27,13 @@ Integrate livewire with sweetalert.
 ```blade
     ...
     // place this directive in the header
-    @laratoastUIStyles
+    @laratoast-styles
 
-    // no need to call this, as it has already been called when you call @laratoastLoadUIScripts
-    @laratoastUIScripts
+    // no need to call this, as it has already been called when you call @laratoast-scripts
+    @laratoast-scripts
 
     // no need to include this as it has already been loaded in init file
-    @laratoastLoadUIScripts
+    @laratoast-scripts
     ...
 ```
 
