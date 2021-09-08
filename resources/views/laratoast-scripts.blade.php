@@ -1,4 +1,4 @@
-@laratoast-scripts
+@laratoastUIScripts
 
 <script>
 
