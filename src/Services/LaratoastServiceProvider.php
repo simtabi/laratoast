@@ -48,7 +48,7 @@ class LaratoastServiceProvider extends ServiceProvider
         $this->loadViewsFrom(self::PATH . 'resources/views', 'laratoast');
 
         // inject required javascript
-        Blade::include('laratoast::laratoast-scripts', 'laratoastScripts');
+        Blade::include('laratoast::scripts', 'laratoastInit');
 
         $this->registerDirectives();
         $this->registerPublishables();

@@ -31,9 +31,6 @@ Integrate livewire with sweetalert.
 
     // no need to call this, as it has already been called when you call @laratoastScripts
     @laratoastScripts
-
-    // no need to include this as it has already been loaded in init file
-    @laratoastScripts
     ...
 ```
 
