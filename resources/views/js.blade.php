@@ -1,4 +1,4 @@
-@laratoastScripts
+@laratoastJs
 
 <script>
 
@@ -89,13 +89,19 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        if (Livewire == undefined) return;
+
+        if (Livewire == undefined) {
+            return;
+        }
+
         Livewire.on('toast:fire', event => {
             return ToastNotification(event);
         });
+
         Livewire.on('swal:fire', event => {
             return SwalModal(event);
         });
+
     });
 
 </script>

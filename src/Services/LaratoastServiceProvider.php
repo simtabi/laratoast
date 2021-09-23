@@ -74,15 +74,15 @@ class LaratoastServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 self::PATH . 'config/laratoast.php' => config_path('laratoast.php'),
-            ], 'laratoast-config');
+            ], 'laratoast:config');
 
             $this->publishes([
                 self::PATH . 'public'               => public_path('vendor/laratoast'),
-            ], 'laratoast-assets');
+            ], 'laratoast:assets');
 
             $this->publishes([
                 self::PATH . 'resources/views'      => resource_path('views/vendor/laratoast'),
-            ], 'laratoast-views');
+            ], 'laratoast:views');
         }
     }
 
@@ -90,15 +90,15 @@ class LaratoastServiceProvider extends ServiceProvider
     private function registerDirectives()
     {
         // inject required javascript
-        Blade::include('laratoast::scripts', 'laratoastInitScripts');
+        Blade::include('laratoast::init', 'laratoastInit');
 
-        Blade::directive('laratoastStyles', function () {
+        Blade::directive('laratoastCss', function () {
             $styles  = $this->getComponentCdnStyles();
             $styles .= $this->getComponentStyles();
             return $styles;
         });
 
-        Blade::directive('laratoastScripts', function () {
+        Blade::directive('laratoastJs', function () {
             $scripts  = $this->getComponentCdnScripts();
             $scripts .= $this->getComponentScripts();
             return $scripts;

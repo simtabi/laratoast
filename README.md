@@ -27,18 +27,18 @@ Integrate livewire with sweetalert.
 ```blade
     ...
     // place this directive in the header
-    @laratoastStyles
+    @laratoastCss
 
     // no need to call this, as it has already been called when you call @laratoastScripts
-    @laratoastScripts
+    @laratoastInit
     ...
 ```
 
 ### 3. Extra config file <!-- omit in toc -->
 
-Publish the configs: `php artisan vendor:publish --tag=laratoast-assets`.
-Publish the configs: `php artisan vendor:publish --tag=laratoast-config`.
-Publish the configs: `php artisan vendor:publish --tag=laratoast-views`.
+Publish the configs: `php artisan vendor:publish --tag=laratoast:assets`.
+Publish the configs: `php artisan vendor:publish --tag=laratoast:config`.
+Publish the configs: `php artisan vendor:publish --tag=laratoast:views`.
 > See [available configuration](#available-configuration)
 
 ---
