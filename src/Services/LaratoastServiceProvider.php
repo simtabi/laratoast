@@ -13,15 +13,19 @@ class LaratoastServiceProvider extends ServiceProvider
     private const PATH = __DIR__ . '/../../';
 
     public static array $cdnAssets  = [
-        'styles'  => [
+        'css'  => [
         ],
-        'scripts' => [
+        'js' => [
             '//cdn.jsdelivr.net/npm/sweetalert2@11'
         ],
     ];
     public static array $assets = [
-        'styles'  => 'jquery.toast.css',
-        'scripts' => 'jquery.toast.js',
+        'css'  => [
+            'jquery.toast.css',
+        ],
+        'js' => [
+            'jquery.toast.js',
+        ],
     ];
 
 
@@ -107,7 +111,7 @@ class LaratoastServiceProvider extends ServiceProvider
 
     private function getComponentStyles()
     {
-        $styles = self::$assets['styles'] ?? [];
+        $styles = self::$assets['css'] ?? [];
 
         if (is_array($styles) && (count($styles) >= 1)) {
 
@@ -123,7 +127,7 @@ class LaratoastServiceProvider extends ServiceProvider
 
     private function getComponentScripts()
     {
-        $scripts = self::$assets['scripts'] ?? [];
+        $scripts = self::$assets['js'] ?? [];
 
         if (is_array($scripts) && (count($scripts) >= 1)) {
             return collect($scripts)->map(function($item) {
@@ -138,7 +142,7 @@ class LaratoastServiceProvider extends ServiceProvider
 
     private function getComponentCdnStyles()
     {
-        $styles = self::$cdnAssets['styles'] ?? [];
+        $styles = self::$cdnAssets['css'] ?? [];
 
         if (is_array($styles) && (count($styles) >= 1)) {
 
@@ -155,7 +159,7 @@ class LaratoastServiceProvider extends ServiceProvider
     private function getComponentCdnScripts()
     {
 
-        $scripts = self::$cdnAssets['scripts'] ?? [];
+        $scripts = self::$cdnAssets['js'] ?? [];
 
         if (is_array($scripts) && (count($scripts) >= 1)) {
             return collect($scripts)->map(function($item) {

@@ -1,3 +1,4 @@
+@laratoastCss
 @laratoastJs
 
 <script>
