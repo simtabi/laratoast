@@ -1,6 +1,6 @@
 <?php
 
-namespace Simtabi\Laratoast\Provider;
+namespace Simtabi\Laratoast\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;

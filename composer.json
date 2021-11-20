@@ -25,7 +25,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Simtabi\\Laratoast\\Provider\\LaratoastServiceProvider"
+        "Simtabi\\Laratoast\\Providers\\LaratoastServiceProvider"
       ],
       "aliases": {
         "LaratoastFlash": "Simtabi\\Laratoast\\Facades\\LaratoastFlashFacade",
