@@ -2,7 +2,7 @@
 
 namespace Simtabi\Laratoast\Contracts;
 
-interface SessionStore
+interface SessionStorage
 {
     /**
      * Flash a message to the session.

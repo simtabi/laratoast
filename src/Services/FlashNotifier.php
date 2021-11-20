@@ -4,7 +4,7 @@ namespace Simtabi\Laratoast\Services;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
-use Simtabi\Laratoast\Contracts\SessionStore;
+use Simtabi\Laratoast\Contracts\SessionStorage;
 use Simtabi\Laratoast\Helpers\LaratoastHelper;
 
 class FlashNotifier
@@ -14,7 +14,7 @@ class FlashNotifier
     /**
      * The session store.
      *
-     * @var SessionStore
+     * @var SessionStorage
      */
     protected $session;
 
@@ -28,9 +28,9 @@ class FlashNotifier
     /**
      * Create a new FlashNotifier instance.
      *
-     * @param SessionStore $session
+     * @param SessionStorage $session
      */
-    function __construct(SessionStore $session)
+    function __construct(SessionStorage $session)
     {
         $this->session = $session;
         $this->messages = collect();

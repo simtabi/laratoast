@@ -5,9 +5,9 @@ namespace Simtabi\Laratoast\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Simtabi\Laratoast\Console\InstallCommand;
-use Simtabi\Laratoast\Contracts\SessionStore as SessionContract;
+use Simtabi\Laratoast\Contracts\SessionStorage as SessionContract;
 use Simtabi\Laratoast\Services\FlashNotifier;
-use Simtabi\Laratoast\Services\SessionStore;
+use Simtabi\Laratoast\Services\SessionStorage;
 use Illuminate\View\Compilers\BladeCompiler;
 
 class LaratoastServiceProvider extends ServiceProvider
@@ -56,7 +56,7 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(SessionContract::class, SessionStore::class);
+        $this->app->bind(SessionContract::class, SessionStorage::class);
 
         $this->app->singleton('laratoast-flash', function () {
             return $this->app->make(FlashNotifier::class);

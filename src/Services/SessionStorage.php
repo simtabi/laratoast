@@ -3,8 +3,9 @@
 namespace Simtabi\Laratoast\Services;
 
 use Illuminate\Session\Store;
+use Simtabi\Laratoast\Contracts\SessionStorage as SessionStorageContract;
 
-class SessionStore implements SessionStore
+class SessionStorage implements SessionStorageContract
 {
     /**
      * @var Store
