@@ -4,8 +4,8 @@ namespace Simtabi\Laratoast\Traits;
 
 trait HasLaratoasts
 {
-    use SweetalertBuilder,
-        ToastBuilder;
+    use SweetalertBuilder;
+    use ToastBuilder;
 
 
     /**

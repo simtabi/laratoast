@@ -1,25 +1,36 @@
 <?php
 
-namespace Simtabi\Laratoast\Services;
+namespace Simtabi\Laratoast\Provider;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Simtabi\Laratoast\Console\InstallCommand;
+use Simtabi\Laratoast\Contracts\SessionStore as SessionContract;
+use Simtabi\Laratoast\Services\FlashNotifier;
+use Simtabi\Laratoast\Services\SessionStore;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class LaratoastServiceProvider extends ServiceProvider
 {
 
-    private const PATH = __DIR__ . '/../../';
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected               $defer       = false;
 
-    public static array $cdnAssets  = [
+    private   const         PACKAGE_PATH = __DIR__ . '/../../';
+
+    public    static array $cdnAssets    = [
         'css'  => [
         ],
         'js' => [
             '//cdn.jsdelivr.net/npm/sweetalert2@11'
         ],
     ];
-    public static array $assets = [
+
+    public    static array $assets       = [
         'css'  => [
             'jquery.toast.css',
         ],
@@ -27,7 +38,6 @@ class LaratoastServiceProvider extends ServiceProvider
             'jquery.toast.js',
         ],
     ];
-
 
     /**
      * Get the services provided by the provider.
@@ -46,7 +56,11 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(SessionContract::class, SessionStore::class);
 
+        $this->app->singleton('laratoast-flash', function () {
+            return $this->app->make(FlashNotifier::class);
+        });
     }
 
     /**
@@ -56,38 +70,39 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         // merge configurations
-        $this->mergeConfigFrom(self::PATH .'config/laratoast.php', 'laratoast');
+        $this->mergeConfigFrom(self::PACKAGE_PATH .'config/laratoast.php', 'laratoast');
 
         // load views
-        $this->loadViewsFrom(self::PATH . 'resources/views', 'laratoast');
+        $this->loadViewsFrom(self::PACKAGE_PATH . 'resources/views', 'laratoast');
 
         $this->registerDirectives();
-        $this->registerPublishables();
+        $this->configureComponents();
 
         if ( $this->app->runningInConsole()) {
+            $this->registerPublishables();
             $this->commands([
                 InstallCommand::class,
             ]);
         }
+
     }
 
 
     private function registerPublishables(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                self::PATH . 'config/laratoast.php' => config_path('laratoast.php'),
-            ], 'laratoast:config');
+        $this->publishes([
+            self::PACKAGE_PATH . 'config/laratoast.php' => config_path('laratoast.php'),
+        ], 'laratoast:config');
 
-            $this->publishes([
-                self::PATH . 'public'               => public_path('vendor/laratoast'),
-            ], 'laratoast:assets');
+        $this->publishes([
+            self::PACKAGE_PATH . 'public'               => public_path('vendor/laratoast'),
+        ], 'laratoast:assets');
 
-            $this->publishes([
-                self::PATH . 'resources/views'      => resource_path('views/vendor/laratoast'),
-            ], 'laratoast:views');
-        }
+        $this->publishes([
+            self::PACKAGE_PATH . 'resources/views'      => resource_path('views/vendor/laratoast'),
+        ], 'laratoast:views');
     }
 
 
@@ -170,6 +185,31 @@ class LaratoastServiceProvider extends ServiceProvider
         }
 
         return false;
+    }
+
+
+    /**
+     * Configure the Laratoasts' Blade components.
+     *
+     * @return void
+     */
+    protected function configureComponents()
+    {
+        $this->callAfterResolving(BladeCompiler::class, function () {
+            $this->registerComponent('message');
+            $this->registerComponent('modal');
+        });
+    }
+
+    /**
+     * Register the given component.
+     *
+     * @param  string  $component
+     * @return void
+     */
+    protected function registerComponent(string $component)
+    {
+        Blade::component('laratoast::components.'.$component, 'laratoast-'.$component);
     }
 
 }

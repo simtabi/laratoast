@@ -17,13 +17,20 @@
   "autoload": {
     "psr-4": {
       "Simtabi\\Laratoast\\": "src"
-    }
+    },
+    "files": [
+      "helpers/helpers.php"
+    ]
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Simtabi\\Laratoast\\Services\\LaratoastServiceProvider"
-      ]
+        "Simtabi\\Laratoast\\Provider\\LaratoastServiceProvider"
+      ],
+      "aliases": {
+        "LaratoastFlash": "Simtabi\\Laratoast\\Facades\\LaratoastFlashFacade",
+        "LaratoastHelper": "Simtabi\\Laratoast\\Facades\\LaratoastHelperFacade"
+      }
     }
   }
 }
