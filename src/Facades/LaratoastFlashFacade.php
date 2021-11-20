@@ -3,7 +3,7 @@
 namespace Simtabi\Laratoast\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Simtabi\Laratoast\Services\FlashNotifier;
+use Simtabi\Laratoast\Helpers\LaratoastHelper;
 
 class LaratoastFlashFacade extends Facade
 {
@@ -14,6 +14,6 @@ class LaratoastFlashFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return FlashNotifier::class;
+        return LaratoastHelper::getFlashSingletonName();
     }
 }

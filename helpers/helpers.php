@@ -2,7 +2,7 @@
 
 use Simtabi\Laratoast\Services\FlashNotifier;
 
-if (! function_exists('flash')) {
+if (! function_exists('laratoastFlashNotifier')) {
 
     /**
      * Arrange for a flash message.
@@ -11,12 +11,12 @@ if (! function_exists('flash')) {
      * @param  string      $level
      * @return FlashNotifier
      */
-    function flash($message = null, $level = 'info')
+    function laratoastFlashNotifier($message = null, $level = 'info'): FlashNotifier
     {
-        $notifier = app('flash');
+        $notifier = app(LaratoastHelper::getFlashSingletonName());
 
         if (! is_null($message)) {
-            return $notifier->message($message, $level);
+            return $notifier->flash($message, $level);
         }
 
         return $notifier;

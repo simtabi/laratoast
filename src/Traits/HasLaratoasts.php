@@ -6,7 +6,7 @@ trait HasLaratoasts
 {
     use SweetalertBuilder;
     use ToastBuilder;
-
+    use FlashBuilder;
 
     /**
      * Show toast error message if error bag has a thing

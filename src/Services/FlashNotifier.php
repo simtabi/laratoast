@@ -23,85 +23,143 @@ class FlashNotifier
      *
      * @var Collection
      */
-    public $messages;
+    protected $messages;
+
+    /**
+     * The message type
+     *
+     * @var ?string
+     */
+    protected $type = null;
+
+    /**
+     * The message
+     *
+     * @var mixed
+     */
+    protected $message;
+
+    /**
+     * @return $this
+     */
+    public function isPrimary()
+    {
+        $this->type = 'primary';
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function isSecondary()
+    {
+        $this->type = 'secondary';
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function isSuccess()
+    {
+        $this->type = 'success';
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function isDanger()
+    {
+        $this->type = 'danger';
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function isWarning()
+    {
+        $this->type = 'warning';
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function isLight()
+    {
+        $this->type = 'light';
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function isDark()
+    {
+        $this->type = 'dark';
+
+        return $this;
+    }
+
 
     /**
      * Create a new FlashNotifier instance.
      *
      * @param SessionStorage $session
      */
-    function __construct(SessionStorage $session)
+    public function __construct(SessionStorage $session)
     {
         $this->session = $session;
         $this->messages = collect();
     }
 
     /**
-     * Flash an information message.
-     *
-     * @param  string|null $message
-     * @return $this
+     * @param mixed $message
+     * @return FlashNotifier
      */
-    public function info($message = null)
+    public function setMessage(mixed $message)
     {
-        return $this->message($message, 'info');
+        $this->message = $message;
+
+        return $this;
     }
 
-    /**
-     * Flash a success message.
-     *
-     * @param  string|null $message
-     * @return $this
-     */
-    public function success($message = null)
+    public function getMessages()
     {
-        return $this->message($message, 'success');
-    }
-
-    /**
-     * Flash an error message.
-     *
-     * @param  string|null $message
-     * @return $this
-     */
-    public function error($message = null)
-    {
-        return $this->message($message, 'danger');
-    }
-
-    /**
-     * Flash a warning message.
-     *
-     * @param  string|null $message
-     * @return $this
-     */
-    public function warning($message = null)
-    {
-        return $this->message($message, 'warning');
+        return $this->messages;
     }
 
     /**
      * Flash a general message.
      *
-     * @param  string|null $message
-     * @param  string|null $level
      * @return $this
      */
-    public function message($message = null, $level = null)
+    public function flash()
     {
+        $message = $this->message;
+        $type    = $this->type;
+
         // If no message was provided, we should update
         // the most recently added message.
         if (! $message) {
-            return $this->updateLastMessage(compact('level'));
+            return $this->updateLastMessage(compact('type'));
         }
 
         if (! $message instanceof Message) {
-            $message = new Message(compact('message', 'level'));
+            $message = new Message(compact('message', 'type'));
         }
 
         $this->messages->push($message);
 
-        return $this->flash();
+        return $this->flashToSession();
     }
 
     /**
@@ -120,19 +178,21 @@ class FlashNotifier
     /**
      * Flash an modal modal.
      *
-     * @param  string|null $message
-     * @param  string      $title
+     * @param string $title
      * @return $this
      */
-    public function modal($message = null, $title = 'Notice')
+    public function flashModal($title = 'Notice')
     {
+        $message = $this->message;
+
         if (! $message) {
-            return $this->updateLastMessage(['title' => $title, 'modal' => true]);
+            return $this->updateLastMessage([
+                'title' => $title,
+                'modal' => true,
+            ]);
         }
 
-        return $this->message(
-            new ModalMessage(compact('title', 'message'))
-        );
+        return $this->setMessage(new ModalMessage(compact('title', 'message')))->flash();
     }
 
     /**
@@ -140,7 +200,7 @@ class FlashNotifier
      *
      * @return $this
      */
-    public function important()
+    public function isImportant()
     {
         return $this->updateLastMessage(['important' => true]);
     }
@@ -160,7 +220,7 @@ class FlashNotifier
     /**
      * Flash all messages to the session.
      */
-    protected function flash()
+    protected function flashToSession()
     {
         $this->session->flash(LaratoastHelper::LARATOAST_FLASH_SESSION_NAME, $this->messages);
 

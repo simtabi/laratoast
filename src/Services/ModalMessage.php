@@ -18,4 +18,10 @@ class ModalMessage extends Message
      * @var bool
      */
     public $modal = true;
+
+
+    public function __construct($attributes = [])
+    {
+        parent::__construct($attributes);
+    }
 }
