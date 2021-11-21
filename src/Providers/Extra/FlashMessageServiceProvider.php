@@ -3,6 +3,8 @@
 namespace Simtabi\Laratoast\Providers\Extra;
 
 use Illuminate\Routing\Router;
+use Simtabi\Laratoast\Helpers\LaratoastHelper;
+use Simtabi\Laratoast\Http\Middleware\ShareMessagesFromSessionMiddleware;
 use Simtabi\Laratoast\View\Components\Alert;
 use Simtabi\Laratoast\View\Components\AlertMessages;
 use Illuminate\View\Factory;
@@ -13,7 +15,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FlashMessageServiceProvider extends PackageServiceProvider
 {
-    public const VIEW_COMPONENT_NAMESPACE = 'flash';
+    public const VIEW_COMPONENT_NAMESPACE = 'laratoast';
 
     public function configurePackage(Package $package): void
     {
@@ -23,7 +25,7 @@ class FlashMessageServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-flash-message')
+            ->name('laratoast')
             ->hasConfigFile()
             ->hasViews() // required for the view component blade files to be registered
             ->hasViewComponents(
@@ -38,9 +40,9 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
         View::macro('withMessage', function (Message $message, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = ViewFacade::shared(config('laratoast.flashit.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = ViewFacade::shared(LaratoastHelper::getConfig('view_share'), new ViewFlashMessageBag());
 
-            ViewFacade::share(config('laratoast.flashit.view_share'), $viewFlashMessageBag->push($message, $bag));
+            ViewFacade::share(LaratoastHelper::getConfig('view_share'), $viewFlashMessageBag->push($message, $bag));
 
             return $this;
         });
@@ -48,9 +50,9 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding a message from the View Facade: ViewFacade::withMessage(...)
         Factory::macro('withMessage', function (Message $message, string $bag = 'default'): Factory {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = ViewFacade::shared(config('laratoast.flashit.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = ViewFacade::shared(LaratoastHelper::getConfig('view_share'), new ViewFlashMessageBag());
 
-            ViewFacade::share(config('laratoast.flashit.view_share'), $viewFlashMessageBag->push($message, $bag));
+            ViewFacade::share(LaratoastHelper::getConfig('view_share'), $viewFlashMessageBag->push($message, $bag));
 
             return $this;
         });
@@ -58,13 +60,13 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding messages from a controller: view('posts-index')->withMessages(...)
         View::macro('withMessages', function (array $messages, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = ViewFacade::shared(config('laratoast.flashit.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = ViewFacade::shared(LaratoastHelper::getConfig('view_share'), new ViewFlashMessageBag());
 
             /** @var Message $message */
             foreach ($messages as $message) {
                 $viewFlashMessageBag->push($message, $bag);
             }
-            ViewFacade::share(config('laratoast.flashit.view_share'), $viewFlashMessageBag);
+            ViewFacade::share(LaratoastHelper::getConfig('view_share'), $viewFlashMessageBag);
 
             return $this;
         });
@@ -72,13 +74,13 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         // This is used when adding messages from the View Facade: ViewFacade::withMessages(...)
         Factory::macro('withMessages', function (array $messages, string $bag = 'default'): Factory {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
-            $viewFlashMessageBag = ViewFacade::shared(config('laratoast.flashit.view_share'), new ViewFlashMessageBag());
+            $viewFlashMessageBag = ViewFacade::shared(LaratoastHelper::getConfig('view_share'), new ViewFlashMessageBag());
 
             /** @var Message $message */
             foreach ($messages as $message) {
                 $viewFlashMessageBag->push($message, $bag);
             }
-            ViewFacade::share(config('laratoast.flashit.view_share'), $viewFlashMessageBag);
+            ViewFacade::share(LaratoastHelper::getConfig('view_share'), $viewFlashMessageBag);
 
             return $this;
         });

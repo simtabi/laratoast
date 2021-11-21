@@ -55,7 +55,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @param string $key
      *
-     * @return Collection|Message[]
+     * @return Collection|FlashNotifier[]
      */
     public function getBag($key)
     {
@@ -90,7 +90,7 @@ class ViewFlashMessageBag implements Countable
     /**
      * Add a new Message collection.
      *
-     * @param Message $message
+     * @param FlashNotifier $message
      * @param string $key
      *
      * @return $this
@@ -130,7 +130,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @param string $key
      *
-     * @return Collection|Message[]
+     * @return Collection|FlashNotifier[]
      */
     public function __get($key)
     {
@@ -141,7 +141,7 @@ class ViewFlashMessageBag implements Countable
      * Dynamically set a view message bag.
      *
      * @param string $key
-     * @param Collection|Message[] $value
+     * @param Collection|FlashNotifier[] $value
      *
      * @return void
      */

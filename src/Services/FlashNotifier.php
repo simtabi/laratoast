@@ -5,7 +5,7 @@ namespace Bilfeldt\LaravelFlashMessage\Services;
 use Illuminate\Support\MessageBag;
 use DomainException;
 
-class Message
+class FlashNotifier
 {
     public const LEVEL_MESSAGE = 'message';
     public const LEVEL_INFO    = 'info';
@@ -19,7 +19,7 @@ class Message
     protected MessageBag $messages;
     protected array      $links;
 
-    public static function levels(): array
+    public static function getLevels(): array
     {
         return [
             self::LEVEL_MESSAGE,
@@ -30,29 +30,29 @@ class Message
         ];
     }
 
-    public static function info(string $text): self
+    public static function flashInfo(string $text): self
     {
         return (self::make($text))->level(self::LEVEL_INFO);
     }
 
-    public static function success(string $text): self
+    public static function flashSuccess(string $text): self
     {
         return (self::make($text))->level(self::LEVEL_SUCCESS);
     }
 
-    public static function warning(string $text): self
+    public static function flashWarning(string $text): self
     {
         return (self::make($text))->level(self::LEVEL_WARNING);
     }
 
-    public static function error(string $text): self
+    public static function flashError(string $text): self
     {
         return (self::make($text))->level(self::LEVEL_ERROR);
     }
 
-    public static function make(string $text): self
+    public static function make(string $text, string $level = self::LEVEL_MESSAGE): self
     {
-        return new self($text);
+        return new self($text, $level);
     }
 
     public function __construct(string $text, string $level = self::LEVEL_MESSAGE)
@@ -70,7 +70,7 @@ class Message
 
     public function level(string $level): self
     {
-        if (!in_array($level, self::levels())) {
+        if (!in_array($level, self::getLevels())) {
             throw new DomainException("Invalid message level: $level");
         }
 
