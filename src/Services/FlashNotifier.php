@@ -1,9 +1,10 @@
 <?php
 
-namespace Bilfeldt\LaravelFlashMessage\Services;
+namespace Simtabi\Laratoast\Services;
 
-use Illuminate\Support\MessageBag;
 use DomainException;
+use Illuminate\Support\MessageBag;
+use Simtabi\Laratoast\Services\ViewFlashMessageBag;
 
 class FlashNotifier
 {
@@ -18,7 +19,7 @@ class FlashNotifier
     protected string     $title;
     protected MessageBag $messages;
     protected array      $links;
-
+    
     public static function getLevels(): array
     {
         return [
@@ -168,4 +169,39 @@ class FlashNotifier
             'links'      => $this->links,
         ];
     }
+
+    //======================================================================
+    // HELPERS
+    //======================================================================
+
+    /**
+     * Flash a message to the session.
+     *
+     * @param Message $message
+     * @param string                                $bag
+     *
+     * @return void
+     */
+    public static function addMessageToSession(Message $message, string $bag = 'default')
+    {
+        // This is added as a helper function simply because \Illuminate\Session\Store is not Macroable
+        session()->flash(LaratoastHelper::getFlashSessionName().'.'.$bag.'.'.Str::orderedUuid(), $message);
+
+        // Note that we are using ordered uuid as keys and flashing each message individually to the storage instead of
+        // flashing the entire ViewFlashMessageBag object. This is because flashing the entire object will require
+        // fetching it from session, adding new messages and re-flashing. During this process any already flashed
+        // messages will be re-flashed and hence be shown for an "extra" request.
+        // Despite this "bug" this is how Laravel does it with errors. I expect this can cause problems especially
+        // when being used in Livewire. See https://github.com/laravel/framework/blob/master/src/Illuminate/Http/RedirectResponse.php#L131
+        /*
+        $messages = session()->get(LaratoastHelper::getFlashSessionName(), new ViewFlashMessageBag());
+
+        if (! $messages instanceof ViewFlashMessageBag) {
+            $messages = new ViewFlashMessageBag();
+        }
+
+        session()->flash(LaratoastHelper::getFlashSessionName(), $messages->push($message, $bag));
+        */
+    }
+
 }

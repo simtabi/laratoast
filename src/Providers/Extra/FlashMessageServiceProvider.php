@@ -5,15 +5,15 @@ namespace Simtabi\Laratoast\Providers\Extra;
 use Illuminate\Routing\Router;
 use Simtabi\Laratoast\Helpers\LaratoastHelper;
 use Simtabi\Laratoast\Http\Middleware\ShareMessagesFromSessionMiddleware;
+use Simtabi\Laratoast\Services\ViewFlashMessageBag;
 use Simtabi\Laratoast\View\Components\Alert;
 use Simtabi\Laratoast\View\Components\AlertMessages;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\View as ViewFacade;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class FlashMessageServiceProvider extends PackageServiceProvider
+class FlashMessageServiceProvider extends ServiceProvider
 {
     public const VIEW_COMPONENT_NAMESPACE = 'laratoast';
 

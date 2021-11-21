@@ -1,6 +1,6 @@
 <?php
 
-namespace Bilfeldt\LaravelFlashMessage\Services;
+namespace Simtabi\Laratoast\Services;
 
 use Countable;
 use Illuminate\Support\Arr;
