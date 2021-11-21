@@ -14,6 +14,6 @@ class LaratoastFlashFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return LaratoastHelper::getFlashSingletonName();
+        return LaratoastHelper::getFlashFacadeName();
     }
 }

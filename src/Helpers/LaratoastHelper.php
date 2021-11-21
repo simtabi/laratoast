@@ -17,7 +17,7 @@ class LaratoastHelper
     public const MESSAGE_TYPE_DANGER  = 'danger';
     public const MESSAGE_TYPE_WARNING = 'warning';
 
-    public static function getFlashSingletonName(): string
+    public static function getFlashFacadeName(): string
     {
         return self::LARATOAST_FLASH_SINGLETON_NAME;
     }

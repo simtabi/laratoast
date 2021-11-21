@@ -1,25 +1,18 @@
 <?php
 
 use Simtabi\Laratoast\Services\FlashNotifier;
+use Simtabi\Laratoast\Helpers\LaratoastHelper;
 
-if (! function_exists('laratoastFlashNotifier')) {
+if (! function_exists('laratoastFlash')) {
 
     /**
      * Arrange for a flash message.
      *
-     * @param  string|null $message
-     * @param  string      $level
      * @return FlashNotifier
      */
-    function laratoastFlashNotifier($message = null, $level = 'info'): FlashNotifier
+    function laratoastFlash(): FlashNotifier
     {
-        $notifier = app(LaratoastHelper::getFlashSingletonName());
-
-        if (! is_null($message)) {
-            return $notifier->message($message, $level);
-        }
-
-        return $notifier;
+        return app(LaratoastHelper::getFlashSingletonName());
     }
 
 }

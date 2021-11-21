@@ -11,7 +11,7 @@ trait FlashBuilder
     public function fireFlashMessage(): FlashNotifier
     {
 
-        $notifier = app(LaratoastHelper::getFlashSingletonName());
+        $notifier = app(LaratoastHelper::getFlashFacadeName());
 
         if (! is_null($message)) {
             return $notifier->message($message, $level);
@@ -19,7 +19,7 @@ trait FlashBuilder
 
         return $notifier;
 
-        return app(LaratoastHelper::getFlashSingletonName());
+        return app(LaratoastHelper::getFlashFacadeName());
     }
 
 }
