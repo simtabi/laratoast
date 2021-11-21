@@ -12,10 +12,10 @@ class LaratoastHelper
     public const LARATOAST_FLASH_SESSION_NAME   = 'laratoast_flash_messages';
     public const LARATOAST_SESSION_NAME         = 'laratoast';
 
-    public static function kebabCase($string)
-    {
-        return Str::of($string)->kebab();
-    }
+    public const MESSAGE_TYPE_INFO    = 'info';
+    public const MESSAGE_TYPE_SUCCESS = 'success';
+    public const MESSAGE_TYPE_DANGER  = 'danger';
+    public const MESSAGE_TYPE_WARNING = 'warning';
 
     public static function getFlashSingletonName(): string
     {
@@ -30,6 +30,16 @@ class LaratoastHelper
     public static function getSessionName(): string
     {
         return self::LARATOAST_SESSION_NAME;
+    }
+
+    public static function resetFlashes($string)
+    {
+        session()->forget(self::getFlashSessionName());
+    }
+
+    public static function kebabCase($string)
+    {
+        return Str::of($string)->kebab();
     }
 
 }

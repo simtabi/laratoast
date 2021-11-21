@@ -1,3 +1,7 @@
+@props([
+    'reset' => true,
+])
+
 @foreach (session(LaratoastHelper::getFlashSessionName(), collect())->toArray() as $message)
     @if ($message['modal'])
         @include('laramodal::components.modal', [
@@ -25,4 +29,8 @@
     @endif
 @endforeach
 
-{{ session()->forget(LaratoastHelper::getFlashSessionName()) }}
+@if($reset)
+    @php
+        LaratoastHelper::resetFlashes();
+    @endphp
+@endif
