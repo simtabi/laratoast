@@ -32,7 +32,7 @@ class LaratoastHelper
         return self::LARATOAST_SESSION_NAME;
     }
 
-    public static function resetFlashes($string)
+    public static function resetFlashes()
     {
         session()->forget(self::getFlashSessionName());
     }

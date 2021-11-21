@@ -2,6 +2,10 @@
   "name": "simtabi/laratoast",
   "description": "Sweetalert and Toaster notifications for Laravel livewire",
   "type": "library",
+  "require": {
+    "spatie/laravel-package-tools": "^1.4.3",
+    "illuminate/contracts": "^8.51"
+  },
   "require-dev": {
     "orchestra/testbench": "^6.18"
   },
