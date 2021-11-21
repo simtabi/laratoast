@@ -19,7 +19,7 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     protected              $defer       = false;
 
-    private   const        PACKAGE_PATH = __DIR__ . '/../../config/';
+    private   const        PACKAGE_PATH = __DIR__ . '/../../';
 
     public    static array $cdnAssets   = [
         'css'  => [
@@ -55,7 +55,7 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // 
+        //
     }
 
     /**
