@@ -2,24 +2,26 @@
 
 namespace Simtabi\Laratoast\Http\Middleware;
 
+use Illuminate\Http\Request;
+use Simtabi\Laratoast\Helpers\LaratoastHelper;
 use Simtabi\Laratoast\ViewFlashMessageBag;
 use Closure;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 /** This file is essentially a copy of \Illuminate\View\Middleware\ShareErrorsFromSession */
-class ShareMessagesFromSession
+class ShareMessagesFromSessionMiddleware
 {
     /**
      * The view factory implementation.
      *
-     * @var \Illuminate\Contracts\View\Factory
+     * @var ViewFactory
      */
     protected ViewFactory $view;
 
     /**
      * Create a new error binder instance.
      *
-     * @param \Illuminate\Contracts\View\Factory $view
+     * @param ViewFactory $view
      *
      * @return void
      */
@@ -31,19 +33,19 @@ class ShareMessagesFromSession
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param Request $request
+     * @param Closure $next
      *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        // If the current session has an "messages" variable bound to it, we will share
+        // If the current session has a "messages" variable bound to it, we will share
         // its value with all view instances so the views can easily access messages
         // without having to bind. An empty collection is set when there aren't any messages.
         $this->view->share(
             'messages',
-            ViewFlashMessageBag::make($request->session()->get(config('flash-message.session_flash')) ?: [])
+            ViewFlashMessageBag::make($request->session()->get(LaratoastHelper::getFlashSessionName()) ?: [])
         );
 
         // Putting the messages in the view for every view allows the developer to just

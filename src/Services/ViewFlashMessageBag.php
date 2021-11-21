@@ -5,6 +5,7 @@ namespace Bilfeldt\LaravelFlashMessage\Services;
 use Countable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Simtabi\Laratoast\Message;
 
 /**
  * @mixin Collection
@@ -30,7 +31,8 @@ class ViewFlashMessageBag implements Countable
         $viewFlashMessageBag = new self();
 
         foreach ($bags as $bag => $messages) {
-            $viewFlashMessageBag->put($bag, Collection::make($messages)->values()); // values() is used since we are not interested in the keys which is a uuid when using session flashing
+            // values() is used since we are not interested in the keys which is a uuid when using session flashing
+            $viewFlashMessageBag->put($bag, Collection::make($messages)->values());
         }
 
         return $viewFlashMessageBag;
@@ -53,7 +55,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @param string $key
      *
-     * @return Collection|\Simtabi\Laratoast\Message[]
+     * @return Collection|Message[]
      */
     public function getBag($key)
     {
@@ -73,10 +75,10 @@ class ViewFlashMessageBag implements Countable
     /**
      * Add a new Message collection.
      *
-     * @param string                                                                 $key
-     * @param Collection|\Simtabi\Laratoast\Message[] $messages
+     * @param string $key
+     * @param Collection $messages
      *
-     * @return \Simtabi\Laratoast\ViewFlashMessageBag
+     * @return $this
      */
     public function put($key, Collection $messages)
     {
@@ -88,10 +90,10 @@ class ViewFlashMessageBag implements Countable
     /**
      * Add a new Message collection.
      *
-     * @param \Simtabi\Laratoast\Message $message
-     * @param string                                $key
+     * @param Message $message
+     * @param string $key
      *
-     * @return \Simtabi\Laratoast\ViewFlashMessageBag
+     * @return $this
      */
     public function push(Message $message, string $key = 'default')
     {
@@ -128,7 +130,7 @@ class ViewFlashMessageBag implements Countable
      *
      * @param string $key
      *
-     * @return Collection|\Simtabi\Laratoast\Message[]
+     * @return Collection|Message[]
      */
     public function __get($key)
     {
@@ -138,8 +140,8 @@ class ViewFlashMessageBag implements Countable
     /**
      * Dynamically set a view message bag.
      *
-     * @param string                                                                 $key
-     * @param Collection|\Simtabi\Laratoast\Message[] $value
+     * @param string $key
+     * @param Collection|Message[] $value
      *
      * @return void
      */

@@ -24,17 +24,12 @@ class LaratoastHelper
 
     public static function getFlashSessionName(): string
     {
-        return self::LARATOAST_FLASH_SESSION_NAME;
+        return self::getConfig('session_flash');
     }
 
-    public static function getSessionName(): string
+    public static function getConfig($key = '')
     {
-        return self::LARATOAST_SESSION_NAME;
-    }
-
-    public static function resetFlashes()
-    {
-        session()->forget(self::getFlashSessionName());
+        return config('laratoast.flashit' . (!empty($key) ? ".$key" : ''));
     }
 
     public static function kebabCase($string)

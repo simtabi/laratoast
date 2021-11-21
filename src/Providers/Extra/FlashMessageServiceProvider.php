@@ -2,6 +2,7 @@
 
 namespace Simtabi\Laratoast\Providers\Extra;
 
+use Illuminate\Routing\Router;
 use Simtabi\Laratoast\View\Components\Alert;
 use Simtabi\Laratoast\View\Components\AlertMessages;
 use Illuminate\View\Factory;
@@ -81,5 +82,8 @@ class FlashMessageServiceProvider extends PackageServiceProvider
 
             return $this;
         });
+
+        $router = $this->app->make(Router::class);
+        $router->pushMiddlewareToGroup('web', ShareMessagesFromSessionMiddleware::class);
     }
 }

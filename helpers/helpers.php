@@ -17,7 +17,7 @@ if (!function_exists('session_message')) {
     function session_message(Message $message, string $bag = 'default')
     {
         // This is added as a helper function simply because \Illuminate\Session\Store is not Macroable
-        session()->flash(config('flash-message.session_flash').'.'.$bag.'.'.Str::orderedUuid(), $message);
+        session()->flash(config('laratoast.flashit.session_flash').'.'.$bag.'.'.Str::orderedUuid(), $message);
 
         // Note that we are using ordered uuid as keys and flashing each message individually to the storage instead of
         // flashing the entire ViewFlashMessageBag object. This is because flashing the entire object will require
@@ -26,13 +26,13 @@ if (!function_exists('session_message')) {
         // Despite this "bug" this is how Laravel does it with errors. I expect this can cause problems especially
         // when being used in Livewire. See https://github.com/laravel/framework/blob/master/src/Illuminate/Http/RedirectResponse.php#L131
         /*
-        $messages = session()->get(config('flash-message.session_flash'), new \Simtabi\Laratoast\ViewFlashMessageBag());
+        $messages = session()->get(config('laratoast.flashit.session_flash'), new \Simtabi\Laratoast\ViewFlashMessageBag());
 
         if (! $messages instanceof \Simtabi\Laratoast\ViewFlashMessageBag) {
             $messages = new \Simtabi\Laratoast\ViewFlashMessageBag;
         }
 
-        session()->flash(config('flash-message.session_flash'), $messages->push($message, $bag));
+        session()->flash(config('laratoast.flashit.session_flash'), $messages->push($message, $bag));
         */
     }
 }

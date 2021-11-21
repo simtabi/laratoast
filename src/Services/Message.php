@@ -3,20 +3,21 @@
 namespace Bilfeldt\LaravelFlashMessage\Services;
 
 use Illuminate\Support\MessageBag;
+use DomainException;
 
 class Message
 {
     public const LEVEL_MESSAGE = 'message';
-    public const LEVEL_INFO = 'info';
+    public const LEVEL_INFO    = 'info';
     public const LEVEL_SUCCESS = 'success';
     public const LEVEL_WARNING = 'warning';
-    public const LEVEL_ERROR = 'error';
+    public const LEVEL_ERROR   = 'error';
 
-    protected string $level;
-    protected string $text;
-    protected string $title;
+    protected string     $level;
+    protected string     $text;
+    protected string     $title;
     protected MessageBag $messages;
-    protected array $links;
+    protected array      $links;
 
     public static function levels(): array
     {
@@ -58,8 +59,8 @@ class Message
     {
         $this->level($level);
         $this->text($text);
-        $this->title = '';
-        $this->links = [];
+        $this->title    = '';
+        $this->links    = [];
         $this->messages = new MessageBag();
     }
 
@@ -70,7 +71,7 @@ class Message
     public function level(string $level): self
     {
         if (!in_array($level, self::levels())) {
-            throw new \DomainException("Invalid message level: $level");
+            throw new DomainException("Invalid message level: $level");
         }
 
         $this->level = $level;
