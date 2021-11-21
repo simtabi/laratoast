@@ -5,11 +5,8 @@ namespace Simtabi\Laratoast\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Simtabi\Laratoast\Console\InstallCommand;
-use Simtabi\Laratoast\Contracts\SessionStorage as SessionContract;
 use Simtabi\Laratoast\Helpers\LaratoastHelper;
 use Simtabi\Laratoast\Providers\Extra\FlashMessageServiceProvider;
-use Simtabi\Laratoast\Services\FlashNotifier;
-use Simtabi\Laratoast\Services\SessionStorage;
 use Illuminate\View\Compilers\BladeCompiler;
 
 class LaratoastServiceProvider extends ServiceProvider
@@ -20,11 +17,11 @@ class LaratoastServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected               $defer       = false;
+    protected              $defer       = false;
 
-    private   const         PACKAGE_PATH = __DIR__ . '/../../';
+    private   const        PACKAGE_PATH = __DIR__ . '/../../config/';
 
-    public    static array $cdnAssets    = [
+    public    static array $cdnAssets   = [
         'css'  => [
         ],
         'js' => [
@@ -32,7 +29,7 @@ class LaratoastServiceProvider extends ServiceProvider
         ],
     ];
 
-    public    static array $assets       = [
+    public    static array $assets      = [
         'css'  => [
             'jquery.toast.css',
         ],
@@ -58,13 +55,7 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        $this->app->bind(SessionContract::class, SessionStorage::class);
-
-        $this->app->singleton(LaratoastHelper::getFlashFacadeName(), function () {
-            return $this->app->make(FlashNotifier::class);
-        });
-
+        // 
     }
 
     /**

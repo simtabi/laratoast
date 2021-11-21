@@ -17,26 +17,24 @@ class FlashMessageServiceProvider extends PackageServiceProvider
 {
     public const VIEW_COMPONENT_NAMESPACE = 'laratoast';
 
-    public function configurePackage(Package $package): void
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('laratoast')
-            ->hasConfigFile()
-            ->hasViews() // required for the view component blade files to be registered
-            ->hasViewComponents(
-                self::VIEW_COMPONENT_NAMESPACE,
-                Alert::class,
-                AlertMessages::class
-            );
+        // 
     }
 
-    public function packageBooted()
+    public function boot()
     {
+        $this->loadViewComponentsAs(self::VIEW_COMPONENT_NAMESPACE, [
+            'alert'         => Alert::class,
+            'alert-message' => AlertMessages::class,
+        ]);
+        
         // This is used when adding a message from a controller: view('posts-index')->withMessage(...)
         View::macro('withMessage', function (Message $message, string $bag = 'default'): View {
             /** @var ViewFlashMessageBag $viewFlashMessageBag */
@@ -88,4 +86,5 @@ class FlashMessageServiceProvider extends PackageServiceProvider
         $router = $this->app->make(Router::class);
         $router->pushMiddlewareToGroup('web', ShareMessagesFromSessionMiddleware::class);
     }
+    
 }
