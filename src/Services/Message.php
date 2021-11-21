@@ -2,6 +2,8 @@
 
 namespace Simtabi\Laratoast\Services;
 
+use Simtabi\Laratoast\Helpers\LaratoastHelper;
+
 class Message implements \ArrayAccess
 {
     /**
@@ -23,14 +25,14 @@ class Message implements \ArrayAccess
      *
      * @var string
      */
-    public $level = 'info';
+    public $type = LaratoastHelper::MESSAGE_TYPE_INFO;
 
     /**
      * Whether the message should auto-hide.
      *
      * @var bool
      */
-    public $important = false;
+    public $isImportant = false;
 
     /**
      * Whether the message is a modal.

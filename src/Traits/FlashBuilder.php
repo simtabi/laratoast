@@ -8,9 +8,16 @@ use Simtabi\Laratoast\Services\FlashNotifier;
 trait FlashBuilder
 {
 
-    public function fireFlashMessage(): FlashNotifier
+    function fireFlashMessage($message = null, string $level = LaratoastHelper::MESSAGE_TYPE_INFO): FlashNotifier
     {
-        return app(LaratoastHelper::getFlashFacadeName());
+
+        $notifier = app(LaratoastHelper::getFlashFacadeName());
+
+        if (! is_null($message)) {
+            return $notifier->message($message, $level);
+        }
+
+        return $notifier;
     }
 
 }

@@ -7,7 +7,6 @@ use Illuminate\Support\Traits\Macroable;
 use Simtabi\Laratoast\Contracts\SessionStorage;
 use Simtabi\Laratoast\Helpers\LaratoastHelper;
 
-
 class FlashNotifier
 {
     use Macroable;
@@ -20,18 +19,11 @@ class FlashNotifier
     protected $session;
 
     /**
-     * The message type.
-     *
-     * @var static
-     */
-    protected $type;
-
-    /**
-     * The message collection.
+     * The messages collection.
      *
      * @var Collection
      */
-    protected $messages;
+    public $messages;
 
     /**
      * Create a new FlashNotifier instance.
@@ -40,47 +32,10 @@ class FlashNotifier
      */
     function __construct(SessionStorage $session)
     {
-        $this->messages = collect();
         $this->session  = $session;
+        $this->messages = collect();
     }
 
-    public function typeIsInfo()
-    {
-        $this->type = LaratoastHelper::MESSAGE_TYPE_INFO;
-
-        return $this;
-    }
-
-    public function typeIsSuccess()
-    {
-        $this->type = LaratoastHelper::MESSAGE_TYPE_SUCCESS;
-
-        return $this;
-    }
-
-    public function typeIsDanger()
-    {
-        $this->type = LaratoastHelper::MESSAGE_TYPE_DANGER;
-
-        return $this;
-    }
-
-    public function typeIsWarning()
-    {
-        $this->type = LaratoastHelper::MESSAGE_TYPE_WARNING;
-
-        return $this;
-    }
-
-    /**
-     * Add an "important" flash to the session.
-     *
-     * @return $this
-     */
-    public function isImportant()
-    {
-        return $this->updateLastMessage(['important' => true]);
-    }
 
     /**
      * Flash an information message.
@@ -88,9 +43,9 @@ class FlashNotifier
      * @param  string|null $message
      * @return $this
      */
-    public function flashInfo($message = null)
+    public function info($message = null)
     {
-        $this->generateFlash($message, $this->typeIsInfo());
+        return $this->message($message, LaratoastHelper::MESSAGE_TYPE_INFO);
     }
 
     /**
@@ -99,9 +54,9 @@ class FlashNotifier
      * @param  string|null $message
      * @return $this
      */
-    public function flashSuccess($message = null)
+    public function success($message = null)
     {
-        $this->generateFlash($message, $this->typeIsSuccess());
+        return $this->message($message, LaratoastHelper::MESSAGE_TYPE_SUCCESS);
     }
 
     /**
@@ -110,9 +65,9 @@ class FlashNotifier
      * @param  string|null $message
      * @return $this
      */
-    public function flashErrorMessage($message = null)
+    public function error($message = null)
     {
-        $this->generateFlash($message, $this->typeIsDanger());
+        return $this->message($message, LaratoastHelper::MESSAGE_TYPE_DANGER);
     }
 
     /**
@@ -121,78 +76,33 @@ class FlashNotifier
      * @param  string|null $message
      * @return $this
      */
-    public function flashWarningMessage($message = null)
+    public function warning($message = null)
     {
-        $this->generateFlash($message, $this->typeIsWarning());
-    }
-
-    /**
-     * Flash a warning message.
-     *
-     * @param  string|null $message
-     * @return $this
-     */
-    public function flashGeneralMessage($message = null, $type = null)
-    {
-        $this->generateFlash($message, $type);
-    }
-
-    /**
-     * Flash a modal message.
-     *
-     * @param  string|null $message
-     * @param  string      $title
-     * @return $this
-     */
-    public function flashModal($message = null, $title = 'Notice')
-    {
-        if (! $message) {
-            return $this->updateLastMessage(['title' => $title, 'modal' => true]);
-        }
-
-        return $this->generateFlash(
-            new ModalMessage(compact('title', 'message'))
-        );
-    }
-
-    /**
-     * Clear all registered messages.
-     *
-     * @return $this
-     */
-    public function resetMessages()
-    {
-        $this->messages = collect();
-
-        return $this;
+        return $this->message($message, LaratoastHelper::MESSAGE_TYPE_WARNING);
     }
 
     /**
      * Flash a general message.
      *
      * @param  string|null $message
-     * @param  string|null $type
+     * @param  string|null $level
      * @return $this
      */
-    protected function generateFlash($message = null, $type = null)
+    public function message($message = null, $level = null)
     {
-
         // If no message was provided, we should update
         // the most recently added message.
         if (! $message) {
-            return $this->updateLastMessage(compact('type'));
+            return $this->updateLastMessage(compact('level'));
         }
 
         if (! $message instanceof Message) {
-            $message = new Message(compact('message', 'type'));
+            $message = new Message(compact('message', 'level'));
         }
 
         $this->messages->push($message);
 
-        // flash all messages to session
-        $this->session->flash(LaratoastHelper::getFlashSessionName(), $this->messages);
-
-        return $this;
+        return $this->flash();
     }
 
     /**
@@ -208,4 +118,53 @@ class FlashNotifier
         return $this;
     }
 
+    /**
+     * Flash a modal message.
+     *
+     * @param  string|null $message
+     * @param  string      $title
+     * @return $this
+     */
+    public function modal($message = null, $title = 'Notice')
+    {
+        if (! $message) {
+            return $this->updateLastMessage(['title' => $title, 'modal' => true]);
+        }
+
+        return $this->message(
+            new ModalMessage(compact('title', 'message'))
+        );
+    }
+
+    /**
+     * Add an "important" flash to the session.
+     *
+     * @return $this
+     */
+    public function isImportant()
+    {
+        return $this->updateLastMessage(['important' => true]);
+    }
+
+    /**
+     * Clear all registered messages.
+     *
+     * @return $this
+     */
+    public function clear()
+    {
+        $this->messages = collect();
+
+        return $this;
+    }
+
+    /**
+     * Flash all messages to the session.
+     */
+    protected function flash()
+    {
+        $this->session->flash(LaratoastHelper::getFlashSessionName(), $this->messages);
+
+        return $this;
+    }
 }

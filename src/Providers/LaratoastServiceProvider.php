@@ -57,11 +57,13 @@ class LaratoastServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         $this->app->bind(SessionContract::class, SessionStorage::class);
 
         $this->app->singleton(LaratoastHelper::getFlashFacadeName(), function () {
             return $this->app->make(FlashNotifier::class);
         });
+
     }
 
     /**
