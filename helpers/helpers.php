@@ -13,10 +13,11 @@ if (! function_exists('laratoastFlashNotifier')) {
      */
     function laratoastFlashNotifier($message = null, $level = 'info'): FlashNotifier
     {
+
         $notifier = app(LaratoastHelper::getFlashSingletonName());
 
         if (! is_null($message)) {
-            return $notifier->flash($message, $level);
+            return $notifier->message($message, $level);
         }
 
         return $notifier;
